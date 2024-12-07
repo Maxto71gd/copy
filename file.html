@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Sign Up</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up & Login</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="form-container">
-            <h2 id="form-title">Login</h2>
-            <form id="form">
-                <div class="input-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" required>
-                </div>
-                <button type="button" id="submit-btn">Login</button>
-                <p id="message"></p>
-            </form>
-            <p>
-                <span id="toggle-text">Don't have an account?</span>
-                <button id="toggle-btn">Sign Up</button>
-            </p>
-        </div>
-    </div>
-    <script src="script.js"></script>
-
-    <a href="www.google.com">about</a>
+        <!-- Sign Up Form -->
+      <div class="form hidden" id="signup-form">
+        <h2>Sign Up</h2>
+        <form>
+          <input type="text" placeholder="Username" required>
+          <input type="email" placeholder="Email" required>
+          <input type="password" placeholder="Password" required>
+          <button type="submit">Sign Up</button>
+        <input type="number" placeholder="Enter phone number" required>
+        
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dropdown Example</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Dooro Qaybtaada</h2>
+    <form>
+      <label for="categories">Qaybaha:</label>
+      <select id="categories" name="categories" required>
+        <option value="" disabled selected>Dooro Qayb</option>
+        <option value="technology">somalia</option>
+        <option value="science">somaliland</option>
+        <option value="education">kenya</option>
+        <option value="health">lubnan</option>
+      </select>
+      <button type="submit">Submit<
