@@ -1,56 +1,166 @@
-let users = []; // Halkaan ayaa lagu keydinayaa isticmaale yaasha
 
-const form = document.getElementById("form");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const submitBtn = document.getElementById("submit-btn");
-const toggleBtn = document.getElementById("toggle-btn");
-const toggleText = document.getElementById("toggle-text");
-const formTitle = document.getElementById("form-title");
-const message = document.getElementById("message");
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page in HTML with CSS Code Example</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
-let isSignUp = false;
 
-toggleBtn.addEventListener("click", () => {
-    isSignUp = !isSignUp;
-    formTitle.textContent = isSignUp ? "Sign Up" : "Login";
-    toggleText.textContent = isSignUp
-        ? "Already have an account?"
-        : "Don't have an account?";
-    submitBtn.textContent = isSignUp ? "Sign Up" : "Login";
-    message.textContent = "";
-});
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"><link rel="stylesheet" href="./style.css">
 
-submitBtn.addEventListener("click", () => {
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="box-form">
+	<div class="left">
+		<div class="overlay">
+		<h3>soo dhawoow .</h1>
+		<p>halkani waa website aad ka qaadan karto  free coins fadlan gal accounkaaga pesta ka dibna hel coins</p>
+		<div><!DOCTYPE html>
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
+    <title>Tusaale Link</title>
+</head>
+<body>
 
-    if (email === "" || password === "") {
-        message.textContent = "Please fill in all fields.";
-        return;
-    }
+    <!-- Link lagu furayo tab cusub -->
+    <a href="https:  https://maxto71gd.github.io/Free-efootball-/"target="_blank">contantc
+</body>
+</html></div>
+			
+		</span>
+		</div>
+	</div>
+	
+	
+		<div class="right">
+		<h5>Login</h5>
+		<p>Don't have an account? <a href="#">Creat Your Account</a> it takes less than a minute</p>
+		<div class="inputs">
+			<input type="Email" placeholder="Email adress">
+			<br>
+			<input type="password" placeholder="password">
+		</div>
+			
+			<br><br>
+			
+		<div class="remember-me--forget-password">
+				<!-- Angular -->
+	<label>
+		<input type="checkbox" name="item" checked/>
+		<span class="text-checkbox">Remember me</span>
+	</label>
+			<p>forget password?</p>
+		</div>
+			
+			<br>
+			<button>Login</button>
+	</div>
+	
+</div>
+<!-- partial -->
+  
+</body>
+</html>
+<style>
 
-    if (isSignUp) {
-        // Diiwaan Gelin
-        const userExists = users.some((user) => user.email === email);
-        if (userExists) {
-            message.textContent = "Account already exists.";
-        } else {
-            users.push({ email, password });
-            message.style.color = "green";
-            message.textContent = "Account created successfully!";
-        }
-    } else {
-        // Login
-        const user = users.find((user) => user.email === email && user.password === password);
-        if (user) {
-            message.style.color = "green";
-            message.textContent = "Login successful!";
-        } else {
-            message.style.color = "red";
-            message.textContent = "Account not found. Please sign up.";
-        }
-    }
-    emailInput.value = "";
-    passwordInput.value = "";
-});
+body {
+  background-image: linear-gradient(135deg, #FAB2FF 10%, #1904E5 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: "Open Sans", sans-serif;
+  color: #333333;
+}
+
+.box-form {
+  margin: 0 auto;
+  width: 80%;
+  background: #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex: 1 1 100%;
+  align-items: stretch;
+  justify-content: space-between;
+  box-shadow: 0 0 20px 6px #090b6f85;
+}
+@media (max-width: 980px) {
+  .box-form {
+    flex-flow: wrap;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+  }
+}
+.box-form div {
+  height: auto;
+}
+.box-form .left {
+  color: #FFFFFF;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("https://i.pinimg.com/736x/5d/73/ea/5d73eaabb25e3805de1f8cdea7df4a42--tumblr-backgrounds-iphone-phone-wallpapers-iphone-wallaper-tumblr.jpg");
+  overflow: hidden;
+}
+.box-form .left .overlay {
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  background: #5961f9ad;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.box-form .left .overlay h1 {
+  font-size: 10vmax;
+  line-height: 1;
+  font-weight: 900;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.box-form .left .overlay span p {
+  margin-top: 30px;
+  font-weight: 900;
+}
+.box-form .left .overlay span a {
+  background: #3b5998;
+  color: #FFFFFF;
+  margin-top: 10px;
+  padding: 14px 50px;
+  border-radius: 100px;
+  display: inline-block;
+  box-shadow: 0 3px 6px 1px #042d4657;
+}
+.box-form .left .overlay span a:last-child {
+  background: #1dcaff;
+  margin-left: 30px;
+}
+.box-form .right {
+  padding: 40px;
+  overflow: hidden;
+}
+@media (max-width: 980px) {
+  .box-form .right {
+    width: 100%;
+  }
+}
+.box-form .right h5 {
+  font-size: 6vmax;
+  line-height: 0;
+}
+.box-form .right p {
+  font-size: 14px;
+  color: #B0B3B9;
+}
+input{
+    width: 200px;
+    height: 30px;
+    justify-content: center;
+    background: black;
+    border-radius: 30px;
+    
+    
+}
+
+</style>
