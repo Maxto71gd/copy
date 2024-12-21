@@ -3,6 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <script>
+        window.onload = function () {
+            // Hubi haddii isticmaaluhu ka soo maray CAPTCHA bogga
+            const captchaVerified = sessionStorage.getItem("captchaVerified");
+
+            if (captchaVerified !== "true") {
+                alert("You must complete the CAPTCHA verification first.");
+                window.location.href = "index.html"; // Ku celi bogga CAPTCHA
+            }
+        };
+    </script>
+</head>
+<body>
+
+    <h1>Welcome to the Home Page</h1>
+    <p>You have successfully passed the CAPTCHA verification!</p>
+
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Repeat Text with Numbers</title>
 </head>
 <body>
@@ -54,14 +82,5 @@ repeatButton.addEventListener("click", () => {
         result += `${i}. ${text}\n`; // Ku dar lambarka iyo qoraalka
     }
 
-    output.textContent = result; // Ku muuji natiijada
-});
-        window.onload = function () {
-            // Hubi haddii isticmaaluhu ka soo maray CAPTCHA bogga
-            const captchaVerified = sessionStorage.getItem("captchaVerified");
-
-            if (captchaVerified !== "true") {
-                alert("You must complete the CAPTCHA verification first.");
-                window.location.href = "file.html"; // Ku celi bogga CAPTCHA
-            }
-        }
+    output.textContent = result; 
+}};
