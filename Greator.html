@@ -3,57 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repeat Text with Numbers</title>
+    <title>Qoraal iyo Tirada</title>
 </head>
 <body>
-    <div>
-        <label for="textInput">kun ka dhig:</label>
-        <input type="text" id="textInput" placeholder="ku qor halkan siaad boqol uga dhigto">
-        <button id="repeatButton">ka dhig kun</button>
-    </div>
+    <h1>Ku qor qoraalkaaga</h1>
+    <input type="text" id="inputField" placeholder="Geli qoraalkaaga">
+    <button onclick="processInput()">Soo bandhig</button>
 
-    <div>
-        <h3>Natiijada:</h3>
-        <pre id="output"></pre>
-    </div>
+    <h2>Natiijooyinka:</h2>
+    <div id="output"></div>
 
-    <script src="script.js"></script>
+    <script>
+        function processInput() {
+            const qoraalka = document.getElementById("inputField").value;
+            const output = document.getElementById("output");
+
+            // Tirtir wixii horey u jiray
+            output.innerHTML = "";
+
+            // Qoraalka ku soo bandhig 100 jeer
+            for (let i = 1; i <= 1000; i++) {
+                const line = document.createElement("p");
+                line.textContent = `${i} ${qoraalka}`;
+                output.appendChild(line);
+            }
+        }
+    </script>
 </body>
 </html>
-<style>
-html {
-   background: linear-gradient(to right, dodgerblue 0%, deepskyblue 100%);
-}
-h1{
-   color: white;
-
-}
-input {
-    color:red;
-    border-radius:50px
-
-}
-input:placeholder {
-    color: white;
-}
-</style>
-<script>
-    
-// Hel elementiyada muhiimka ah
-const textInput = document.getElementById("textInput");
-const repeatButton = document.getElementById("repeatButton");
-const output = document.getElementById("output");
-
-// Marka badhanka la gujiyo
-repeatButton.addEventListener("click", () => {
-    const text = textInput.value; // Hel qoraalka input
-    let result = ""; // Abuur string bannaan oo natiijada lagu keydiyo
-
-    // Ku celceli qoraalka 100 jeer
-    for (let i = 1; i <= 1000; i++) {
-        result += `${i}. ${text}\n`; // Ku dar lambarka iyo qoraalka
-    }
-
-    output.textContent = result; 
-}};
-</script>
