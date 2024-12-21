@@ -18,7 +18,8 @@
 
             if (userInput == captchaCode) {
                 alert("waad saxday.");
-                window.location.href = "Greator.html"; // Redirect
+                window.location.href = "Greator.html";
+                document.querySelector("input").disabled =true// Redirect
             } else {
                 alert("fadlan iska hubi koodhka.");
                 generateCaptcha(); // Abuur CAPTCHA cusub haddii khaldan yahay
