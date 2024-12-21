@@ -1,26 +1,3 @@
- <script>
-        window.onload = function () {
-            // Hubi haddii isticmaaluhu ka soo maray CAPTCHA bogga
-            const captchaVerified = sessionStorage.getItem("captchaVerified");
-
-            if (captchaVerified !== "true") {
-                alert("You must complete the CAPTCHA verification first.");
-                window.location.href = "file.html"; // Ku celi bogga CAPTCHA
-	    } else {
-            
-        };
-    </script>
-</head>
-<body>
-
-    <h1>Welcome to the Home Page</h1>
-    <p>You have successfully passed the CAPTCHA verification!</p>
-
-</body>
-</html>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,4 +56,13 @@ repeatButton.addEventListener("click", () => {
 
     output.textContent = result; // Ku muuji natiijada
 });
-	</script>
+    <script>
+        window.onload = function () {
+            // Hubi haddii isticmaaluhu ka soo maray CAPTCHA bogga
+            const captchaVerified = sessionStorage.getItem("captchaVerified");
+
+            if (captchaVerified !== "true") {
+                alert("You must complete the CAPTCHA verification first.");
+                window.location.href = "file.html"; // Ku celi bogga CAPTCHA
+            }
+        }
