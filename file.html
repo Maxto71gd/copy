@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple CAPTCHA</title>
+    <script>
+        let captchaCode; // Waxaa lagu kaydin doonaa lambarka CAPTCHA
+
+        function generateCaptcha() {
+            // Abuur CAPTCHA cusub
+            captchaCode = Math.floor(1000 + Math.random() * 9000); // Lambarka 4-tirada ah
+            document.getElementById("captchaText").textContent = captchaCode;
+        }
+
+        function verifyCaptcha() {
+            const userInput = document.getElementById("captchaInput").value;
+
+            if (userInput == captchaCode) {
+                alert("CAPTCHA Verified! You may proceed.");
+                window.location.href = "Greator.html"; // Redirect
+            } else {
+                alert("Incorrect CAPTCHA. Please try again.");
+                generateCaptcha(); // Abuur CAPTCHA cusub haddii khaldan yahay
+            }
+        }
+
+        // Abuur CAPTCHA markii bogga la shido
+        window.onload = generateCaptcha;
+    </script>
+</head>
+<body>
+
+    <h1>Simple CAPTCHA</h1>
+    <p>Enter the code shown below:</p>
+
+    <div style="font-size: 24px; font-weight: bold; color: blue;" id="captchaText"></div>
+    <input type="text" id="captchaInput" placeholder="Enter CAPTCHA here">
+    <button onclick="verifyCaptcha()">Verify</button>
+
+</body>
+</html>
