@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <script>
+ <script>
         window.onload = function () {
             // Hubi haddii isticmaaluhu ka soo maray CAPTCHA bogga
             const captchaVerified = sessionStorage.getItem("captchaVerified");
@@ -12,7 +6,8 @@
             if (captchaVerified !== "true") {
                 alert("You must complete the CAPTCHA verification first.");
                 window.location.href = "file.html"; // Ku celi bogga CAPTCHA
-            }
+	    } else {
+            
         };
     </script>
 </head>
