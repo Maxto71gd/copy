@@ -1,2 +1,58 @@
-const-string
-cons v2, 0x9d9e9
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple CAPTCHA</title>
+    <script>
+        let captchaCode; // Waxaa lagu kaydin doonaa lambarka CAPTCHA
+
+        function generateCaptcha() {
+            // Abuur CAPTCHA cusub
+            captchaCode = Math.floor(1000000 + Math.random() * 9000); // Lambarka 4-tirada ah
+            document.getElementById("captchaText").textContent = captchaCode;
+        }
+
+        function verifyCaptcha() {
+            const userInput = document.getElementById("captchaInput").value;
+
+            if (userInput == captchaCode) {
+                alert("successfully login.");
+                window.location.href = "kala.html";
+                document.querySelector("input").disabled =true;
+                document.querySelector("button").disabled =true
+            } else {
+                alert("error code not found .");
+                generateCaptcha(); // Abuur CAPTCHA cusub haddii khaldan yahay
+            }
+        }
+
+        // Abuur CAPTCHA markii bogga la shido
+        window.onload = generateCaptcha;
+    </script>
+    <style>
+    html, body {
+    height: 100%; /* Si loo hubiyo in asalka uu buuxiyo shaashada */
+    margin: 0; /* Ka saar xuduudaha bannaan */
+    padding: 0;
+}
+
+html {
+    background-image: url('sawir.jpg'); /* Ku dar sawirka */
+    background-size: cover; /* Buuxi shaashada oo dhan */
+    background-position: center; /* Dhexdhexaadso sawirka */
+    background-repeat: no-repeat; /* Ha celin sawirka */
+}
+ </style>
+</head>
+<body>
+
+    <h1>Simple CAPTCHA</h1>
+    <p>koodhka xaga ku qoran meesha ku qor:</p>
+
+    <div style="font-size: 24px; font-weight: bold; color: blue;" id="captchaText"></div>
+    <input type="text" id="captchaInput" placeholder="Enter CAPTCHA here">
+    <button onclick="verifyCaptcha()">Verify</button>
+
+</body>
+</html>
