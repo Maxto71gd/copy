@@ -31,7 +31,7 @@
         .calculator {
             width: 300px;
             background: transparent;
-            border-radius: 10px;
+            border-radius: 40px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
             padding: 20px;
         }
@@ -71,7 +71,8 @@
         }
 
         button:nth-child(1) {
-            background: #f44336;
+            background: #ff0000;
+            text-zise:2px;
         }
     </style>
 </head>
@@ -79,7 +80,7 @@
     <div class="calculator">
         <input type="text" id="result" disabled>
         <div class="buttons">
-            <button onclick="clearResult()">C</button>
+            <button onclick="clearResult()">Clrear</button>
             <button onclick="appendValue('7')">7</button>
             <button onclick="appendValue('8')">8</button>
             <button onclick="appendValue('9')">9</button>
