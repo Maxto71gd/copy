@@ -9,6 +9,7 @@
     <h1>Ku qor qoraalkaaga</h1>
     <input type="text" id="inputField" placeholder="Geli qoraalkaaga">
     <button onclick="processInput()">Soo bandhig</button>
+    <button onclick="pilan()">iska block meehsa</button>
     <label >caawinaad </label>
     <a href="https://wa.me//:252672146979" target="_blank">contacts</a>
 
@@ -29,7 +30,11 @@
                 const line = document.createElement("p");
                 line.textContent = `${i} ${qoraalka}`;
                 output.appendChild(line);
-                alert("waxaad ka dhigtay kun jeer ee copy yayso");
+            }
+              function pilan() {
+                  alert("waad block tay");
+            document.querySelector("buton").disabled =true;
+            document.querySelector("input").disabled =true;
             }
         }
     </script>
