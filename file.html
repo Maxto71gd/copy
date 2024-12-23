@@ -17,12 +17,12 @@
             const userInput = document.getElementById("captchaInput").value;
 
             if (userInput == captchaCode) {
-                alert("successfully login.");
+                alert("wad ku guulaysatay inaad gasho.");
                 window.location.href = "Greator.html";
                 document.querySelector("input").disabled =true;
                 document.querySelector("button").disabled =true
             } else {
-                alert("error code not found .");
+                alert("fadlan iska hubi koodhka .");
                 generateCaptcha(); // Abuur CAPTCHA cusub haddii khaldan yahay
             }
         }
