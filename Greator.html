@@ -10,12 +10,11 @@
     <input type="text" id="inputField" placeholder="Geli qoraalkaaga">
     <button onclick="processInput()">Soo bandhig</button>
     <button onclick="pilan()">block</button>
-    <label >caawinaad </label>
+    <label>caawinaad </label>
     <a href="https://wa.me//:252672146979" target="_blank">contacts</a>
 
     <h2>Natiijooyinka:</h2>
     <div id="output"></div>
-</body>
     
     <script>
         function processInput() {
@@ -25,38 +24,39 @@
             // Tirtir wixii horey u jiray
             output.innerHTML = "";
 
-            // Qoraalka ku soo bandhig 100 jeer
+            // Qoraalka ku soo bandhig 1000 jeer
             for (let i = 1; i <= 1000; i++) {
                 const line = document.createElement("p");
                 line.textContent = `${i} ${qoraalka}`;
                 output.appendChild(line);
             }
-            
-              function pilan() {
-                  alert("waad block tay");
-            document.querySelector("buton").disabled =true;
-            document.querySelector("input").disabled =true;
-            }
+        }
+
+        function pilan() {
+            alert("waad block tay");
+            document.querySelector("button").disabled = true; // Disable the first button
+            document.querySelector("input").disabled = true;  // Disable the input field
         }
     </script>
+    
     <style>
        html, body {
-        height: 100%; /* Si loo hubiyo in asalka uu buuxiyo shaashada */
-        margin: 0; /* Ka saar xuduudaha bannaan */
-        padding: 0;
-}
+            height: 100%; /* Si loo hubiyo in asalka uu buuxiyo shaashada */
+            margin: 0; /* Ka saar xuduudaha bannaan */
+            padding: 0;
+        }
 
-     html {
-        background-image: url('Sheeg.jpg'); /* Ku dar sawirka */
-        background-size: cover; /* Buuxi shaashada oo dhan */
-        background-position: center; /* Dhexdhexaadso sawirka */
-        background-repeat: no-repeat; /* Ha celin sawirka */
-}
-    a {
-        text-align: right;
-        color: blue;
-    
-    
-</style>
+        html {
+            background-image: url('Sheeg.jpg'); /* Ku dar sawirka */
+            background-size: cover; /* Buuxi shaashada oo dhan */
+            background-position: center; /* Dhexdhexaadso sawirka */
+            background-repeat: no-repeat; /* Ha celin sawirka */
+        }
+
+        a {
+            text-align: right;
+            color: blue;
+        }
+    </style>
 </body>
 </html>
