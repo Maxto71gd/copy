@@ -13,6 +13,7 @@
     <button onclick="kala()">ka qaad</button>
     <label>cilad</label>
     <a href="https://wa.me//:252672146979" target="_blank">contacts</a>
+     <button onclick="copyText()">copy</button>
 
     <h2>Natiijooyinka:</h2>
     <div id="output"></div>
@@ -43,6 +44,17 @@
             alert("waad ka qaaday");
             document.querySelector("button:nth-of-type(1)").disabled = false; // Enable the first button
             document.querySelector("input").disabled = false;  // Enable the input field
+        }
+
+        function copyText() {
+            const output = document.getElementById("output");
+            const range = document.createRange();
+            range.selectNodeContents(output);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            document.execCommand("copy");
+            alert("waad koobiyaysay!");
         }
     </script>
     
