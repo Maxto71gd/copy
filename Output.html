@@ -19,9 +19,9 @@
     contacts
     </a>
     <label>caawinaad</label>
-    <button onclick="raf()">bogeena kale"</button>
+    <button onclick="raf()">bogeena kale</button>
     
-     <h2>Natiijooyinka:</h2>
+    <h2>Natiijooyinka:</h2>
     <div id="output"></div>
     
     <script>
@@ -49,67 +49,4 @@
 
         function pilan() {
             alert("waad block tay");
-            document.querySelector("button").disabled = true; // Disable the first button
-            document.querySelector("input").disabled = true;  // Disable the input field
-        }
-
-        function kala() {
-            alert("waad ka qaaday");
-            document.querySelector("button:nth-of-type(1)").disabled = false; // Enable the first button
-            document.querySelector("input").disabled = false;  // Enable the input field
-        }
-
-        function copyText() {
-            const output = document.getElementById("output");
-            const range = document.createRange();
-            range.selectNodeContents(output);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            document.execCommand("copy");
-            alert("waad koobiyaysatay");
-        }
-
-        function raf() {
-            window.location.href "Jio.html":
-        }
-    </script>
-    
-    <style>
-        html {
-            background: #31d1d6;
-        }
-
-        .mami {
-            
-            color: blue;
-            background: #fff;
-            
-        }
-
-        input {
-            background: #9FF4DF;
-            height: 25px;
-            color: blue;
-        }
-
-        #output {
-            white-space: pre-wrap; /* Allows multi-line selection */
-            word-wrap: break-word;
-            color: blue;
-        }
-        label {
-            color: blue;
-        }
-        h1 {
-            color: blue;
-        }
-        h2 {
-            color: blue;
-        }
-        input::placeholder {
-            color: blue;
-        }
-    </style>
-</body>
-</html>
+            document.querySelector("button:nth-of-type(1)").disabled = true; // Disable the first
