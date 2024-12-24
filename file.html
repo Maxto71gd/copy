@@ -38,7 +38,6 @@
             const userInput = document.getElementById("captchaInput").value;
             if (userInput == captchaCode) {
                 startLoading(() => {
-                    alert(translations[currentLang].success);
                     window.location.href = "Output.html";
                     generateCaptcha();
                 });
@@ -49,6 +48,8 @@
         }
 
         function startLoading(callback) {
+            alert
+            (translations[currentLang].success);
             const loadingText = document.getElementById("loadingText");
             const loadingBar = document.getElementById("loadingBar");
             let progress = 0;
