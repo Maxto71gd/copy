@@ -3,12 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAPTCHA with Loading</title>
+    <title>CAPTCHA with Language and Loading</title>
     <script>
         let captchaCode;
+        const translations = {
+            en: {
+                title: "Verify CAPTCHA",
+                instructions: "Please enter the code displayed below:",
+                buttonVerify: "Verify",
+                buttonRefresh: "Refresh",
+                loading: "Loading, please wait... ",
+                success: "Success!.",
+                error: "Incorrect code.",
+            },
+            so: {
+                title: "Xaqiijin CAPTCHA",
+                instructions: "Fadlan geli koodhka hoose ee muuqda:",
+                buttonVerify: "Xaqiiji",
+                buttonRefresh: "Soo Celi",
+                loading: "Fadlan wax yar sug... ",
+                success: "Koodhku waa sax.",
+                error: "Koodhka sax maaha.",
+            },
+        };
+
+        let currentLang = "en"; // Default language
 
         function generateCaptcha() {
-            captchaCode = Math.floor(1000 + Math.random() * 9000); 
+            captchaCode = Math.floor(10000 + Math.random() * 900000);
             document.getElementById("captchaText").textContent = captchaCode;
         }
 
@@ -16,11 +38,12 @@
             const userInput = document.getElementById("captchaInput").value;
             if (userInput == captchaCode) {
                 startLoading(() => {
-                    alert("Success! The code is correct.");
+                    alert(translations[currentLang].success);
                     window.location.href = "Output.html";
+                    generateCaptcha();
                 });
             } else {
-                alert("Incorrect code. Please try again.");
+                alert(translations[currentLang].error);
                 generateCaptcha();
             }
         }
@@ -35,7 +58,7 @@
 
             const interval = setInterval(() => {
                 progress++;
-                loadingText.textContent = `Loading... ${progress}%`;
+                loadingText.textContent = `${translations[currentLang].loading}${progress}%`;
                 loadingBar.style.width = `${progress}%`;
 
                 if (progress >= 100) {
@@ -44,12 +67,21 @@
                     loadingBar.style.display = "none";
                     if (callback) callback();
                 }
-            }, 30); // 30ms si loading uu uga dhakhso badan yahay
+            }, 30); // Quick progress (30ms per step)
         }
 
         function refreshCaptcha() {
             document.getElementById("captchaInput").value = "";
             generateCaptcha();
+        }
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.getElementById("title").textContent = translations[lang].title;
+            document.getElementById("instructions").textContent = translations[lang].instructions;
+            document.getElementById("btnVerify").textContent = translations[lang].buttonVerify;
+            document.getElementById("btnRefresh").textContent = translations[lang].buttonRefresh;
+            document.getElementById("loadingText").textContent = translations[lang].loading;
         }
 
         window.onload = function () {
@@ -137,23 +169,37 @@
             margin-top: 10px;
             transition: width 0.3s;
         }
+
+        select {
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            background: #fff;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Verify CAPTCHA</h1>
-        <p>Please enter the code displayed below:</p>
+        <select onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="so">Somali</option>
+        </select>
+        <h1 id="title">Verify CAPTCHA</h1>
+        <p id="instructions">Please enter the code displayed below:</p>
 
         <div id="captchaText"></div>
         <input type="text" id="captchaInput" placeholder="Enter CAPTCHA">
         <br>
-        <button onclick="verifyCaptcha()">Verify</button>
-        <button onclick="refreshCaptcha()">Refresh</button>
+        <button id="btnVerify" onclick="verifyCaptcha()">Verify</button>
+        <button id="btnRefresh" onclick="refreshCaptcha()">Refresh</button>
 
-        <div id="loadingText">Loading...</div>
+        <div id="loadingText"></div>
         <div id="loadingBar"></div>
     </div>
 
 </body>
-</html>
+    </html>
