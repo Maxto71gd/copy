@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple CAPTCHA</title>
+    <title>CAPTCHA with Language Switcher</title>
     <script>
-        let captchaCode; // Waxaa lagu kaydin doonaa lambarka CAPTCHA
+        let captchaCode;
+        const translations = {
+            en: {
+                title: "Verify CAPTCHA",
+                instructions: "Please enter the code displayed below:",
+                buttonVerify: "Verify",
+                buttonRefresh: "Refresh",
+                success: "Success! The code is correct.",
+                error: "Incorrect code. Please try again.",
+            },
+            so: {
+                title: "Xaqiijin CAPTCHA",
+                instructions: "Fadlan geli koodhka hoose ee muuqda:",
+                buttonVerify: "Xaqiiji",
+                buttonRefresh: "Soo Celi",
+                success: "Guul! Koodhku waa sax.",
+                error: "Koodhka sax maaha. Fadlan isku day mar kale.",
+            },
+        };
+
+        let currentLang = "en"; // Luqadda default waa English
 
         function generateCaptcha() {
-            // Abuur CAPTCHA cusub
-            captchaCode = Math.floor(1000000 + Math.random() * 90000000); // Lambarka 4-tirada ah
+            captchaCode = Math.floor(1000 + Math.random() * 900000); // 4-tirada ah
             document.getElementById("captchaText").textContent = captchaCode;
         }
 
@@ -17,63 +36,127 @@
             const userInput = document.getElementById("captchaInput").value;
 
             if (userInput == captchaCode) {
+                alert(translations[currentLang].success);
                 window.location.href = "Output.html";
-                document.querySelector("input").disabled = true;
             } else {
-                alert("koodhku sax maaha.");
+                alert(translations[currentLang].error);
                 generateCaptcha();
             }
         }
 
-        // Abuur CAPTCHA markii bogga la shido
-        window.onload = function() {
+        function refreshCaptcha() {
+            document.getElementById("captchaInput").value = "";
+            generateCaptcha();
+        }
+
+        function changeLanguage(lang) {
+            currentLang = lang; // Bedel luqadda hadda jirta
+            document.getElementById("title").textContent = translations[lang].title;
+            document.getElementById("instructions").textContent = translations[lang].instructions;
+            document.getElementById("btnVerify").textContent = translations[lang].buttonVerify;
+            document.getElementById("btnRefresh").textContent = translations[lang].buttonRefresh;
+        }
+
+        window.onload = function () {
             generateCaptcha();
         };
-
-        function refresh() {
-            document.querySelector("input").disabled = false;
-            generateCaptcha(); // Soo celi CAPTCHA cusub
-        }
     </script>
     <style>
         html, body {
-            height: 100%; /* Si loo hubiyo in asalka uu buuxiyo shaashada */
-            margin: 0; /* Ka saar xuduudaha bannaan */
+            height: 100%;
+            margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom right, #ff1919, #ff6f61);
+            font-family: Arial, sans-serif;
         }
 
-        html {
-            background: #ff1919;/* Ku dar sawirka */
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        button {
-            height: 50px;
-            background: #abdbe3;
-            width: 100px;
-            color: red;
+        h1 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #captchaText {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #007BFF;
+            margin-bottom: 20px;
         }
 
         input {
-            background: #abdbe3;
-            height: 50px;
-            width: 300px;
-            color: blue;
+            width: 80%;
+            padding: 10px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
         }
 
-        input::placeholder {
-            color: red;
+        input:focus {
+            outline: none;
+            border-color: #007BFF;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        select {
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            background: #fff;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <h1>Xaqiijin</h1>
-    <p>koodhka xaga ku qoran meesha ku qor:</p>
+    <div class="container">
+        <select onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="so">Somali</option>
+        </select>
+        <h1 id="title">Verify CAPTCHA</h1>
+        <p id="instructions">Please enter the code displayed below:</p>
 
-    <div style="font-size: 24px; font-weight: bold; color: blue;" id="captchaText"></div>
-    <input type="text" id="captchaInput" placeholder="Enter CAPTCHA here">
-    <button onclick="verifyCaptcha()">Xaqiiji</button>
-    <button onclick="refresh()">soo celi</button>
+        <div id="captchaText"></div>
+        <input type="text" id="captchaInput" placeholder="Enter CAPTCHA">
+        <br>
+        <button id="btnVerify" onclick="verifyCaptcha()">Verify</button>
+        <button id="btnRefresh" onclick="refreshCaptcha()">Refresh</button>
+    </div>
 
 </body>
 </html>
