@@ -3,58 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAPTCHA with Language Switcher</title>
+    <title>CAPTCHA with Loading</title>
     <script>
         let captchaCode;
-        const translations = {
-            en: {
-                title: "Verify CAPTCHA",
-                instructions: "Please enter the code displayed below:",
-                buttonVerify: "Verify",
-                buttonRefresh: "Refresh",
-                success: "Success!.",
-                error: "Incorrect code..",
-            },
-            so: {
-                title: "Xaqiijin CAPTCHA",
-                instructions: "Fadlan geli koodhka hoose ee muuqda:",
-                buttonVerify: "Xaqiiji",
-                buttonRefresh: "Soo Celi",
-                success: " Koodhku waa sax.",
-                error: "koodhku sax maaha.",
-            },
-        };
-
-        let currentLang = "en"; // Luqadda default waa English
 
         function generateCaptcha() {
-            captchaCode = Math.floor(1000 + Math.random() * 900000); // 4-tirada ah
+            captchaCode = Math.floor(1000 + Math.random() * 9000); 
             document.getElementById("captchaText").textContent = captchaCode;
         }
 
         function verifyCaptcha() {
             const userInput = document.getElementById("captchaInput").value;
-
             if (userInput == captchaCode) {
-                alert(translations[currentLang].success);
-                window.location.href = "Output.html";
+                startLoading(() => {
+                    alert("Success! The code is correct.");
+                    window.location.href = "Output.html";
+                });
             } else {
-                alert(translations[currentLang].error);
+                alert("Incorrect code. Please try again.");
                 generateCaptcha();
             }
+        }
+
+        function startLoading(callback) {
+            const loadingText = document.getElementById("loadingText");
+            const loadingBar = document.getElementById("loadingBar");
+            let progress = 0;
+
+            loadingText.style.display = "block";
+            loadingBar.style.display = "block";
+
+            const interval = setInterval(() => {
+                progress++;
+                loadingText.textContent = `Loading... ${progress}%`;
+                loadingBar.style.width = `${progress}%`;
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    loadingText.style.display = "none";
+                    loadingBar.style.display = "none";
+                    if (callback) callback();
+                }
+            }, 30); // 30ms si loading uu uga dhakhso badan yahay
         }
 
         function refreshCaptcha() {
             document.getElementById("captchaInput").value = "";
             generateCaptcha();
-        }
-
-        function changeLanguage(lang) {
-            currentLang = lang; // Bedel luqadda hadda jirta
-            document.getElementById("title").textContent = translations[lang].title;
-            document.getElementById("instructions").textContent = translations[lang].instructions;
-            document.getElementById("btnVerify").textContent = translations[lang].buttonVerify;
-            document.getElementById("btnRefresh").textContent = translations[lang].buttonRefresh;
         }
 
         window.onload = function () {
@@ -79,6 +74,7 @@
             padding: 20px 40px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
         }
 
         h1 {
@@ -100,18 +96,13 @@
         }
 
         input {
-            width: 80%;
+            width: 100%;
             padding: 10px;
             font-size: 1rem;
             margin-bottom: 20px;
             border: 2px solid #ddd;
             border-radius: 5px;
             text-align: center;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #007BFF;
         }
 
         button {
@@ -122,7 +113,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin: 0 10px;
             transition: background 0.3s;
         }
 
@@ -130,32 +120,39 @@
             background: #0056b3;
         }
 
-        select {
-            margin-bottom: 20px;
-            padding: 10px;
+        #loadingText {
+            display: none;
+            margin-top: 20px;
             font-size: 1rem;
-            border: 2px solid #ddd;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        #loadingBar {
+            display: none;
+            width: 0;
+            height: 10px;
+            background: #007BFF;
             border-radius: 5px;
-            background: #fff;
-            cursor: pointer;
+            margin-top: 10px;
+            transition: width 0.3s;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <select onchange="changeLanguage(this.value)">
-            <option value="en">English</option>
-            <option value="so">Somali</option>
-        </select>
-        <h1 id="title">Verify CAPTCHA</h1>
-        <p id="instructions">Please enter the code displayed below:</p>
+        <h1>Verify CAPTCHA</h1>
+        <p>Please enter the code displayed below:</p>
 
         <div id="captchaText"></div>
         <input type="text" id="captchaInput" placeholder="Enter CAPTCHA">
         <br>
-        <button id="btnVerify" onclick="verifyCaptcha()">Verify</button>
-        <button id="btnRefresh" onclick="refreshCaptcha()">Refresh</button>
+        <button onclick="verifyCaptcha()">Verify</button>
+        <button onclick="refreshCaptcha()">Refresh</button>
+
+        <div id="loadingText">Loading...</div>
+        <div id="loadingBar"></div>
     </div>
 
 </body>
