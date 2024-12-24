@@ -9,7 +9,7 @@
 
         function generateCaptcha() {
             // Abuur CAPTCHA cusub
-            captchaCode = Math.floor(10000 + Math.random() * 900000); // Lambarka 4-tirada ah
+            captchaCode = Math.floor(1000000 + Math.random() * 90000000); // Lambarka 4-tirada ah
             document.getElementById("captchaText").textContent = captchaCode;
         }
 
@@ -17,13 +17,13 @@
             const userInput = document.getElementById("captchaInput").value;
 
             if (userInput == captchaCode) {
-                alert("successfully fully login.");
+                alert("successfully login.");
                 window.location.href = "Output.html";
                 document.querySelector("input").disabled =true;
                 document.querySelector("button").disabled =true
             } else {
                 alert("koodhku sax maaha.");
-                generateCaptcha(); // Abuur CAPTCHA cusub haddii khaldan yahay
+                generateCaptcha(maxto);
             }
         }
 
