@@ -19,6 +19,7 @@
     <div id="output"></div>
     
     <script>
+        alert("halkani waa website aad wax ku koobiyeyn karto haddi aad cilad dareento fadlan naga la soo xidhiidh contacts ka xaga sare saaran");
         function processInput() {
             const qoraalka = document.getElementById("inputField").value;
             const output = document.getElementById("output");
@@ -27,7 +28,7 @@
             output.innerHTML = "";
 
             // Qoraalka ku soo bandhig 1000 jeer
-            for (let i = 1; i <= 1000; i++) {
+            for (let i = 1; i <= 100; i++) {
                 const line = document.createElement("p");
                 line.textContent = `${i} ${qoraalka}`;
                 output.appendChild(line);
