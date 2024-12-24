@@ -18,7 +18,7 @@
 
             if (userInput == captchaCode) {
                 window.location.href = "Output.html";
-                document.querySelector("input").disabled =true;
+                document.querySelector("input").disabled = true;
             } else {
                 alert("koodhku sax maaha.");
                 generateCaptcha();
@@ -26,42 +26,47 @@
         }
 
         // Abuur CAPTCHA markii bogga la shido
-        window.onload = generateCaptcha;
-    }
-}
+        window.onload = function() {
+            generateCaptcha();
+        };
 
         function refresh() {
             document.querySelector("input").disabled = false;
-            generateCaptcha();
+            generateCaptcha(); // Soo celi CAPTCHA cusub
+        }
     </script>
     <style>
-    html, body {
-    height: 100%; /* Si loo hubiyo in asalka uu buuxiyo shaashada */
-    margin: 0; /* Ka saar xuduudaha bannaan */
-    padding: 0;
-}
+        html, body {
+            height: 100%; /* Si loo hubiyo in asalka uu buuxiyo shaashada */
+            margin: 0; /* Ka saar xuduudaha bannaan */
+            padding: 0;
+        }
 
-html {
-    background-image: url('sawir.jpg'); /* Ku dar sawirka */
-    background-size: cover; /* Buuxi shaashada oo dhan */
-    background-position: center; /* Dhexdhexaadso sawirka */
-    background-repeat: no-repeat; /* Ha celin sawirka */
-}
-button {
-    height: 50px;
-    background: transparent;
-    width: 100px;
-    color: red;
-}
-input {
-    background: transparent;
-    height: 50px;
-    width: 300px;
-    color: red;
-}
-.input:placeholder {
-    color: red;
- </style>
+        html {
+            background-image: url('sawir.jpg'); /* Ku dar sawirka */
+            background-size: cover; /* Buuxi shaashada oo dhan */
+            background-position: center; /* Dhexdhexaadso sawirka */
+            background-repeat: no-repeat; /* Ha celin sawirka */
+        }
+
+        button {
+            height: 50px;
+            background: transparent;
+            width: 100px;
+            color: red;
+        }
+
+        input {
+            background: transparent;
+            height: 50px;
+            width: 300px;
+            color: red;
+        }
+
+        input::placeholder {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 
