@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple CAPTCHA</title>
     <script>
+        alert("gali lixda lambar ee koodhka ah si aad u gasho");
         let captchaCode; // Waxaa lagu kaydin doonaa lambarka CAPTCHA
 
         function generateCaptcha() {
@@ -17,12 +18,12 @@
             const userInput = document.getElementById("captchaInput").value;
 
             if (userInput == captchaCode) {
-                alert("wad ku guulaysatay inaad gasho.");
+                alert("successfully fully login.");
                 window.location.href = "Output.html";
                 document.querySelector("input").disabled =true;
                 document.querySelector("button").disabled =true
             } else {
-                alert("fadlan iska hubi koodhka .");
+                alert("koodhku sax maaha.");
                 generateCaptcha(); // Abuur CAPTCHA cusub haddii khaldan yahay
             }
         }
