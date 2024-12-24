@@ -17,18 +17,21 @@
             const userInput = document.getElementById("captchaInput").value;
 
             if (userInput == captchaCode) {
-                alert("successfully login.");
                 window.location.href = "Output.html";
                 document.querySelector("input").disabled =true;
-                document.querySelector("button").disabled =true
             } else {
                 alert("koodhku sax maaha.");
-                generateCaptcha(maxto);
+                generateCaptcha();
             }
         }
 
         // Abuur CAPTCHA markii bogga la shido
         window.onload = generateCaptcha;
+    }
+}
+
+        function refresh() {
+            document.querySelector("input").disabled = false;
     </script>
     <style>
     html, body {
@@ -67,6 +70,7 @@ input {
     <div style="font-size: 24px; font-weight: bold; color: blue;" id="captchaText"></div>
     <input type="text" id="captchaInput" placeholder="Enter CAPTCHA here">
     <button onclick="verifyCaptcha()">Xaqiiji</button>
+    <button onclick="refresh()">soo celi</button>
 
 </body>
 </html>
