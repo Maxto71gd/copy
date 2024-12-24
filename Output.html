@@ -4,6 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qoraal iyo Tirada</title>
+    <style>
+        html {
+            background: #31d1d6;
+        }
+
+        .mami {
+            color: blue;
+            background: #fff;
+        }
+
+        input {
+            background: #9FF4DF;
+            height: 25px;
+            color: blue;
+        }
+
+        #output {
+            white-space: pre-wrap; /* Allows multi-line selection */
+            word-wrap: break-word;
+            color: blue;
+        }
+
+        label, h1, h2 {
+            color: blue;
+        }
+
+        input::placeholder {
+            color: blue;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <h1>Ku qor qoraalkaaga</h1>
@@ -13,10 +57,13 @@
     <button onclick="pilan()">block</button>
     <button onclick="kala()">ka qaad</button>
     <button onclick="copyText()">copy</button>
-    <input type="range" id="numberOfRepeats" min="1" max="777" value="100" step="1"><span id="repeatValue">100</span> jeer 
+
+    <input type="range" id="numberOfRepeats" min="1" max="777" value="100" step="1">
+    <span id="repeatValue">100</span> jeer
     <label>xadka tirada</label>
+
     <a href="https://wa.me/252672146979?text=Waxaan%20doonayaa%20inaad%20iga%20caawiso%20cilada" target="_blank" class="mami">
-    contacts
+        contacts
     </a>
     <label>caawinaad</label>
     <button onclick="raf()">bogeena kale</button>
@@ -32,7 +79,7 @@
 
         function processInput() {
             const qoraalka = document.getElementById("inputField").value;
-            const repeatCount = document.getElementById("numberOfRepeats").value; // Get the repeat count from slider
+            const repeatCount = document.getElementById("numberOfRepeats").value;
             const output = document.getElementById("output");
             alert("qoraalkaagi waxaad ka dhigtay [" + repeatCount + "] jeer ee taabo badhanka copy si aad u koobiyayso");
 
@@ -49,4 +96,30 @@
 
         function pilan() {
             alert("waad block tay");
-            document.querySelector("button:nth-of-type(1)").disabled = true; // Disable the first
+            document.querySelector("button:nth-of-type(1)").disabled = true; // Disable the first button
+            document.querySelector("input").disabled = true;  // Disable the input field
+        }
+
+        function kala() {
+            alert("waad ka qaaday");
+            document.querySelector("button:nth-of-type(1)").disabled = false; // Enable the first button
+            document.querySelector("input").disabled = false;  // Enable the input field
+        }
+
+        function copyText() {
+            const output = document.getElementById("output");
+            const range = document.createRange();
+            range.selectNodeContents(output);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            document.execCommand("copy");
+            alert("waad koobiyaysatay");
+        }
+
+        function raf() {
+            window.location.href = "Jio.html";
+        }
+    </script>
+</body>
+</html>
