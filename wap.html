@@ -1,0 +1,121 @@
+<html>
+   <head>
+       <title>Xisaabinta Sannado, Bilaha, iyo Maalmaha</title>
+       <style>
+           body {
+               font-family: Arial, sans-serif;
+               background-color: #f0f8ff;
+               color: #333;
+               margin: 0;
+               padding: 0;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               height: 100vh;
+           }
+
+           h1 {
+               color: #4CAF50;
+               text-align: center;
+               margin-bottom: 20px;
+           }
+
+           .container {
+               background-color: #ffffff;
+               padding: 20px;
+               border-radius: 8px;
+               box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+               width: 300px;
+               text-align: center;
+           }
+
+           input[type="text"] {
+               width: 100%;
+               padding: 10px;
+               margin: 10px 0;
+               border-radius: 5px;
+               border: 1px solid #ccc;
+               font-size: 16px;
+               outline: none;
+           }
+
+           input[type="text"]:focus {
+               border-color: #4CAF50;
+               box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+           }
+
+           button {
+               background-color: #4CAF50;
+               color: white;
+               padding: 10px 20px;
+               border: none;
+               border-radius: 5px;
+               cursor: pointer;
+               font-size: 16px;
+               width: 100%;
+               margin-top: 10px;
+           }
+
+           button:hover {
+               background-color: #45a049;
+           }
+
+           p {
+               font-size: 18px;
+               font-weight: bold;
+               margin-top: 20px;
+               color: #333;
+           }
+       </style>
+   </head>
+   <body>
+       <div class="container">
+           <h1>Xisaabi Sannado, Bilaha, iyo Maalmaha</h1>
+           <label for="userDate">Soo geli taariikhda (DD/MM/YYYY):</label>
+           <input type="text" id="userDate" placeholder="Tusaale: 23/12/2024">
+           <button onclick="calculateTime()">Xisaabi</button>
+           <p id="result"></p>
+       </div>
+   </body>
+</html>
+<script>
+    function calculateTime() {
+        // Hel taariikhda uu qoray isticmaaluhu
+        let input = document.getElementById("userDate").value;
+
+        // Kala saar maalinta, bisha, iyo sannadka
+        let [day, month, year] = input.split('/').map(Number);
+
+        // Hubi haddii xogta sax tahay
+        if (!day || !month || !year || isNaN(day) || isNaN(month) || isNaN(year)) {
+            document.getElementById("result").innerText = "Fadlan geli taariikh sax ah (DD/MM/YYYY).";
+            return;
+        }
+
+        // Samee taariikhda isticmaalaha iyo taariikhda hadda
+        let userDate = new Date(year, month - 1, day);
+        let currentDate = new Date();
+
+        // Xisaabi farqiga sannad, bilood, iyo maalmo
+        let yearsDifference = currentDate.getFullYear() - userDate.getFullYear();
+        let monthsDifference = currentDate.getMonth() - userDate.getMonth();
+        let daysDifference = currentDate.getDate() - userDate.getDate();
+
+        // Haddii bilaha farqiga ay ka yar yihiin 0, ka beddel sannadka
+        if (monthsDifference < 0) {
+            yearsDifference--;
+            monthsDifference += 12;
+        }
+
+        // Haddii maalmaha farqiga ay ka yar yihiin 0, ka beddel bilaha
+        if (daysDifference < 0) {
+            monthsDifference--;
+            let lastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+            daysDifference += lastMonth.getDate();
+        }
+
+        // Soo bandhig natiijada
+        document.getElementById("result").innerText = 
+            `Waxa ka soo wareegay: ${yearsDifference} sano, ${monthsDifference} bilood, iyo ${daysDifference} maalmood.`;
+    }
+</script>
