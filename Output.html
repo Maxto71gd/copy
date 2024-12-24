@@ -23,6 +23,7 @@
         function processInput() {
             const qoraalka = document.getElementById("inputField").value;
             const output = document.getElementById("output");
+            alert("qoraalkaagi waxaad ka dhigtay 100 ee taabo badhanka copy si aad u koobiyayso");
 
             // Tirtir wixii horey u jiray
             output.innerHTML = "";
@@ -32,7 +33,6 @@
                 const line = document.createElement("p");
                 line.textContent = `${i} ${qoraalka}`;
                 output.appendChild(line);
-                ("qoraalkaagi waxaad ka dhigtay 100 ee taabo badhanka copy si aad u koobiyayso");
             }
         }
 
@@ -57,6 +57,8 @@
             selection.addRange(range);
             document.execCommand("copy");
             alert("waad koobiyaysay!");
+            alert("Xadkii maalinlaha ahaan waad dhamaysay");
+            document.querySelector("copyText()").disabled = true;
         }
     </script>
     
