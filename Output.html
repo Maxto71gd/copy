@@ -49,21 +49,25 @@
         }
     </style>
     <script>
-        const bannedCountries = ["Somalia",  "Japan", "Ethiopia", "Kenya"]; // Dalalka mamnuuca ah
+        const bannedCountries = ["Somalia", "Japan", "Ethiopia", "Kenya"]; // Dalalka mamnuuca ah
 
-        // Hubi gelitaanka
+        // Hubi haddii waddanku mamnuuc yahay
         function checkAccess() {
+            // Haddii isticmaaluhu horay u mamnuucnaa, si toos ah u xannib
+            if (localStorage.getItem("isBanned") === "true") {
+                blockAccess();
+                return;
+            }
+
             fetch("https://ipapi.co/json/")
                 .then(response => response.json())
                 .then(data => {
                     const userCountry = data.country_name;
 
-                    // Haddii waddanku mamnuuc yahay
+                    // Haddii waddanku mamnuuc yahay, mamnuuc isticmaaleha
                     if (bannedCountries.includes(userCountry)) {
-                        document.body.innerHTML = `
-                            <h1>404 Not Found</h1>
-                            
-                        `;
+                        localStorage.setItem("isBanned", "true");
+                        blockAccess();
                     }
                 })
                 .catch(error => {
@@ -71,7 +75,15 @@
                 });
         }
 
-        // Wac gelitaanka marka bogga la furo
+        // Hawlgalka xannibista
+        function blockAccess() {
+            document.body.innerHTML = `
+                <h1>404 Not Found</h1>
+                <p>Ma jiro adeeg aad ka heli karto boggan. Fadlan la xiriir maamulka haddii aad u baahan tahay caawinaad.</p>
+            `;
+        }
+
+        // Wac hubinta marka bogga la furo
         document.addEventListener("DOMContentLoaded", checkAccess);
     </script>
 </head>
