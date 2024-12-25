@@ -48,6 +48,32 @@
             background-color: #45a049;
         }
     </style>
+    <script>
+        const bannedCountries = ["Somalia", "Ethiopia", "Kenya"]; // Dalalka mamnuuca ah
+
+        // Hubi gelitaanka
+        function checkAccess() {
+            fetch("https://ipapi.co/json/")
+                .then(response => response.json())
+                .then(data => {
+                    const userCountry = data.country_name;
+
+                    // Haddii waddanku mamnuuc yahay
+                    if (bannedCountries.includes(userCountry)) {
+                        document.body.innerHTML = `
+                            <h1>404 Not Found</h1>
+                            
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error("Khalad ayaa dhacay:", error);
+                });
+        }
+
+        // Wac gelitaanka marka bogga la furo
+        document.addEventListener("DOMContentLoaded", checkAccess);
+    </script>
 </head>
 <body>
     <h1>Ku qor qoraalkaaga</h1>
