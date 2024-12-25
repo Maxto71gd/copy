@@ -1,81 +1,75 @@
-From: <Saved by Blink>
-Snapshot-Content-Location: https://maxto71gd.github.io/Free-efootball-/kala.html
-Subject: Calculator Fudud
-Date: Sun, 22 Dec 2024 13:01:26 +0300
-MIME-Version: 1.0
-Content-Type: multipart/related;
-	type="text/html";
-	boundary="----MultipartBoundary--BiObYVYJ840fphH3flDrXZai5bJtwAiAyVGcUSdV8g----"
-
-
-------MultipartBoundary--BiObYVYJ840fphH3flDrXZai5bJtwAiAyVGcUSdV8g----
-Content-Type: text/html
-Content-ID: <frame-26F61BD41BA5255ECC36D3458CCFB9BD@mhtml.blink>
-Content-Transfer-Encoding: binary
-Content-Location: https://maxto71gd.github.io/Free-efootball-/kala.html
-
-<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" type="text/css" href="cid:css-8b9646b1-77c3-441d-8b2a-a47359bd622e@mhtml.blink" />
-    
+<!DOCTYPE html>
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator Fudud</title>
-    
+    <title>Button Taabasho</title>
+    <h2>Tiro koob</h2>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #tapButton {
+            background-color: #4CAF50; /* Midabka button-ka */
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #tapButton:disabled {
+            background-color: #d3d3d3; /* Midabka marka button-ka disable gareeyo */
+            cursor: not-allowed;
+        }
+
+        p {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        span {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <video autoplay="" loop="" muted="" id="background-video">
-  <source src="https://maxto71gd.github.io/Free-efootball-/video.mp4" type="video/mp4">
-  Browser-kaaga ma taageero fiidiyowga.
-    </video>
-    <div class="calculator">
-        <input type="text" id="result" disabled="">
-        <div class="buttons">
-            <button>Clrear</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button>/</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button>*</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>-</button>
-            <button>0</button>
-            <button>.</button>
-            <button>=</button>
-            <button>+</button>
-        </div>
-    </div>
 
-    
+    <button id="tapButton" onclick="updateTap()">Taabo</button>
+    <p>Tirada dadka taabtay: <span id="tapCount">0</span></p>
 
+    <script>
+        // Haddii tirada hore ee dadka taabtay horey u jirtey, ku soo celi
+        let tapCount = localStorage.getItem("tapCount") ? parseInt(localStorage.getItem("tapCount")) : 0;
+        document.getElementById("tapCount").innerText = tapCount;
 
-</body></html>
-------MultipartBoundary--BiObYVYJ840fphH3flDrXZai5bJtwAiAyVGcUSdV8g----
-Content-Type: text/css
-Content-Transfer-Encoding: binary
-Content-Location: cid:css-8b9646b1-77c3-441d-8b2a-a47359bd622e@mhtml.blink
+        // Xisaabi taabashada
+        function updateTap() {
+            tapCount++; // Kordhi tirada dadka taabtay
+            localStorage.setItem("tapCount", tapCount); // Keydi tirada si ay ugu sii jirto
+            document.getElementById("tapCount").innerText = tapCount; // Soo bandhig tirada cusub
+            
+            // Markaad taabato, button-ka ka dhig mid aan la taaban karin
+            document.getElementById("tapButton").disabled = true;
+            
+            // Si button-ka aan la taaban karin marka page-ka dib loo cusboonaysiiyo
+            localStorage.setItem("buttonDisabled", "true");
+        }
 
-@charset "utf-8";
+        // Marka bogga la cusboonaysiiyo, hubi haddii button-ka uu horay u ahaa disabled
+        window.onload = function() {
+            // Haddii button-ka horey uu disable gareeyay
+            if(localStorage.getItem("buttonDisabled") === "true") {
+                document.getElementById("tapButton").disabled = true;
+            }
+        };
+    </script>
 
-html, body { height: 100%; margin: 0px; padding: 0px; overflow: hidden; }
-
-#background-video { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
-
-.content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center; z-index: 1; }
-
-body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0px; }
-
-.calculator { width: 300px; background: transparent; border-radius: 40px; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 10px; padding: 20px; }
-
-#result { width: 100%; height: 50px; color: red; font-size: 1.5em; text-align: right; margin-bottom: 10px; border: none; background: rgb(112, 236, 182); border-radius: 50px; padding: 5px; }
-
-.buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-
-button { height: 50px; font-size: 1.2em; border: none; background: rgb(112, 236, 182); color: green; border-radius: 50px; cursor: pointer; transition: background 0.3s; }
-
-button:hover { background: rgb(69, 160, 73); }
-
-button:nth-child(1) { background: rgb(255, 0, 0); }
-------MultipartBoundary--BiObYVYJ840fphH3flDrXZai5bJtwAiAyVGcUSdV8g------
+</body>
+</html>
