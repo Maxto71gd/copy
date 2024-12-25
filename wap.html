@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
    <head>
        <title>Xisaabinta Sannado, Bilaha, iyo Maalmaha</title>
@@ -71,51 +72,67 @@
    <body>
        <div class="container">
            <h1>Xisaabi Sannado, Bilaha, iyo Maalmaha</h1>
-           <label for="userDate">Soo geli taariikhda (DD/MM/YYYY):</label>
-           <input type="text" id="userDate" placeholder="Tusaale: 23/12/2024">
+           <label for="userDate">Soo geli taariikh sax ah (DD/MM/YYYY):</label>
+           <input type="text" id="userDate" placeholder="Tusaale: DD/MM/YY">
            <button onclick="calculateTime()">Xisaabi</button>
            <p id="result"></p>
        </div>
+       <script>
+           function calculateTime() {
+               const input = document.getElementById("userDate").value;
+
+               // Hubinta qaabka xogta
+               const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+               const match = input.match(regex);
+
+               if (!match) {
+                   document.getElementById("result").innerText = "Fadlan geli taariikh sax ah (DD/MM/YYYY).";
+                   return;
+               }
+
+               const [_, day, month, year] = match.map(Number);
+
+               // Hubinta saxnimada taariikhda la geliyay
+               const userDate = new Date(year, month - 1, day);
+               if (userDate.getDate() !== day || userDate.getMonth() !== month - 1 || userDate.getFullYear() !== year) {
+                   document.getElementById("result").innerText = "Fadlan geli taariikh sax ah (DD/MM/YYYY).";
+                   return;
+               }
+
+               // Waqtiga hadda
+               const currentDate = new Date();
+
+               if (userDate > currentDate) {
+                   document.getElementById("result").innerText = "Fadlan geli taariikh ka horaysa maanta.";
+                   return;
+               }
+
+               let yearsDifference = currentDate.getFullYear() - userDate.getFullYear();
+               let monthsDifference = currentDate.getMonth() - userDate.getMonth();
+               let daysDifference = currentDate.getDate() - userDate.getDate();
+
+               if (daysDifference < 0) {
+                   monthsDifference--;
+                   const lastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+                   daysDifference += lastMonth.getDate();
+               }
+
+               if (monthsDifference < 0) {
+                   yearsDifference--;
+                   monthsDifference += 12;
+               }
+
+               document.getElementById("result").innerText =
+                   `Waxa ka soo wareegay: ${yearsDifference} sano, ${monthsDifference} bilood, iyo ${daysDifference} maalmood.`;
+           }
+
+           // Kormeeraha waqtiga dhabta ah
+           setInterval(() => {
+               const resultElement = document.getElementById("result");
+               if (resultElement && resultElement.innerText) {
+                   calculateTime();
+               }
+           }, 1000); // Xisaabi mar kasta 1 ilbiriqsi
+       </script>
    </body>
 </html>
-<script>
-    function calculateTime() {
-        // Hel taariikhda uu qoray isticmaaluhu
-        let input = document.getElementById("userDate").value;
-
-        // Kala saar maalinta, bisha, iyo sannadka
-        let [day, month, year] = input.split('/').map(Number);
-
-        // Hubi haddii xogta sax tahay
-        if (!day || !month || !year || isNaN(day) || isNaN(month) || isNaN(year)) {
-            document.getElementById("result").innerText = "Fadlan geli taariikh sax ah (DD/MM/YYYY).";
-            return;
-        }
-
-        // Samee taariikhda isticmaalaha iyo taariikhda hadda
-        let userDate = new Date(year, month - 1, day);
-        let currentDate = new Date();
-
-        // Xisaabi farqiga sannad, bilood, iyo maalmo
-        let yearsDifference = currentDate.getFullYear() - userDate.getFullYear();
-        let monthsDifference = currentDate.getMonth() - userDate.getMonth();
-        let daysDifference = currentDate.getDate() - userDate.getDate();
-
-        // Haddii bilaha farqiga ay ka yar yihiin 0, ka beddel sannadka
-        if (monthsDifference < 0) {
-            yearsDifference--;
-            monthsDifference += 12;
-        }
-
-        // Haddii maalmaha farqiga ay ka yar yihiin 0, ka beddel bilaha
-        if (daysDifference < 0) {
-            monthsDifference--;
-            let lastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
-            daysDifference += lastMonth.getDate();
-        }
-
-        // Soo bandhig natiijada
-        document.getElementById("result").innerText = 
-            `Waxa ka soo wareegay: ${yearsDifference} sano, ${monthsDifference} bilood, iyo ${daysDifference} maalmood.`;
-    }
-</script>
