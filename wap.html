@@ -72,8 +72,8 @@
    <body>
        <div class="container">
            <h1>Xisaabi Sannado, Bilaha, iyo Maalmaha</h1>
-           <label for="userDate">Soo geli taariikh sax ah (DD/MM/YYYY):</label>
-           <input type="text" id="userDate" placeholder="Tusaale: DD/MM/YY">
+           <label for="userDate">Soo geli taariikh sax ah (D/M/YYYY):</label>
+           <input type="text" id="userDate" placeholder="Tusaale: D/M/Y">
            <button onclick="calculateTime()">Xisaabi</button>
            <p id="result"></p>
        </div>
@@ -82,11 +82,11 @@
                const input = document.getElementById("userDate").value;
 
                // Hubinta qaabka xogta
-               const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+               const regex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
                const match = input.match(regex);
 
                if (!match) {
-                   document.getElementById("result").innerText = "Fadlan geli taariikh sax ah (DD/MM/YYYY).";
+                   document.getElementById("result").innerText = "Fadlan geli taariikh sax ah (D/M/YYYY).";
                    return;
                }
 
@@ -95,7 +95,7 @@
                // Hubinta saxnimada taariikhda la geliyay
                const userDate = new Date(year, month - 1, day);
                if (userDate.getDate() !== day || userDate.getMonth() !== month - 1 || userDate.getFullYear() !== year) {
-                   document.getElementById("result").innerText = "Fadlan geli taariikh sax ah (DD/MM/YYYY).";
+                   document.getElementById("result").innerText = "Fadlan geli taariikh sax ah (D/M/YYYY).";
                    return;
                }
 
@@ -125,14 +125,6 @@
                document.getElementById("result").innerText =
                    `Waxa ka soo wareegay: ${yearsDifference} sano, ${monthsDifference} bilood, iyo ${daysDifference} maalmood.`;
            }
-
-           // Kormeeraha waqtiga dhabta ah
-           setInterval(() => {
-               const resultElement = document.getElementById("result");
-               if (resultElement && resultElement.innerText) {
-                   calculateTime();
-               }
-           }, 1000); // Xisaabi mar kasta 1 ilbiriqsi
        </script>
    </body>
 </html>
