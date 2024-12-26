@@ -75,6 +75,14 @@
             color: #e74c3c;
             font-weight: bold;
         }
+
+        #progressBar {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #2ecc71;
+            font-weight: bold;
+        }
     </style>
     <script>
         let captchaCode;
@@ -121,9 +129,7 @@
             if (userInput == captchaCode) {
                 failedAttempts = 0;
                 localStorage.removeItem("blockEndTime");
-                alert(translations[currentLang].success);
-                window.location.href 'Output.html';
-                generateCaptcha();
+                startLoading();
             } else {
                 failedAttempts++;
                 if (failedAttempts >= 3) {
@@ -178,6 +184,21 @@
             document.getElementById("loadingText").textContent = "";
         }
 
+        function startLoading() {
+            const progressBar = document.getElementById("progressBar");
+            progressBar.style.display = "block";
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress++;
+                progressBar.textContent = `Loading ${progress}%`;
+                if (progress === 100) {
+                    clearInterval(interval);
+                    window.location.href = "output.html";
+                }
+            }, 30); // 3 seconds total (30ms * 100)
+        }
+
         window.onload = function () {
             generateCaptcha();
             const blockEndTime = localStorage.getItem("blockEndTime");
@@ -207,6 +228,7 @@
         <button id="btnRefresh" onclick="refreshCaptcha()">Refresh</button>
 
         <div id="loadingText"></div>
+        <div id="progressBar"></div>
     </div>
 </body>
-</html>
+                                                                   </html>
