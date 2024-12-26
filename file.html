@@ -40,7 +40,7 @@
         #captchaText {
             font-size: 1.8rem;
             font-weight: bold;
-            color: #e74c3c;
+            color: #329ba8;
             margin-bottom: 20px;
         }
 
@@ -58,14 +58,14 @@
             padding: 12px 20px;
             font-size: 1rem;
             color: #fff;
-            background: #e74c3c;
+            background: #329ba8;
             border: none;
             border-radius: 8px;
             cursor: pointer;
         }
 
         button:disabled {
-            background: #bdc3c7;
+            background: #ed1313;
             cursor: not-allowed;
         }
 
@@ -96,7 +96,7 @@
                 buttonVerify: "Verify",
                 buttonRefresh: "Refresh",
                 success: "Success!",
-                error: "Incorrect code. Remaining attemps is: ",
+                error: "Incorrect code.: ",
                 blocked: `Please wait `,
             },
             so: {
@@ -105,7 +105,7 @@
                 buttonVerify: "Xaqiiji",
                 buttonRefresh: "Soo Celi",
                 success: "Koodhku waa sax.",
-                error: "Koodhka sax maaha. jaanisyada ku hadhay waa: ",
+                error: "Koodhka sax maaha: ",
                 blocked: `Fadlan sug `,
             },
         };
@@ -135,7 +135,7 @@
                 if (failedAttempts >= 3) {
                     blockUser();
                 } else {
-                    alert(translations[currentLang].error + failedAttempts);
+                    alert(translations[currentLang].error);
                 }
                 generateCaptcha();
             }
