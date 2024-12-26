@@ -22,8 +22,6 @@
     <h1>Ku qor qoraalkaaga</h1>
     <input type="text" id="inputField" placeholder="Geli qoraalkaaga">
     <button onclick="processInput()">Soo bandhig</button>
-    <button onclick="pilan()">Block</button>
-    <button onclick="kala()">Ka qaad</button>
     <button onclick="copyText()">Copy</button>
 
     <input type="range" id="numberOfRepeats" min="1" max="100" value="100" step="1">
@@ -98,19 +96,7 @@
             }
         }
 
-        function pilan() {
-            alert("Waad block tay");
-            document.querySelector("button:nth-of-type(1)").disabled = true; 
-            document.querySelector("input").disabled = true;  
-        }
-
-        function kala() {
-            alert("Waad ka qaaday");
-            document.querySelector("button:nth-of-type(1)").disabled = false; 
-            document.querySelector("input").disabled = false;  
-        }
-
-        function copyText() {
+         function copyText() {
             const output = document.getElementById("output");
             const range = document.createRange();
             range.selectNodeContents(output);
