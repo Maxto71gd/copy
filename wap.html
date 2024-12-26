@@ -1,130 +1,121 @@
 <!DOCTYPE html>
-<html>
-   <head>
-       <title>Xisaabinta Sannado, Bilaha, iyo Maalmaha</title>
-       <style>
-           body {
-               font-family: Arial, sans-serif;
-               background-color: #f0f8ff;
-               color: #333;
-               margin: 0;
-               padding: 0;
-               display: flex;
-               justify-content: center;
-               align-items: center;
-               height: 100vh;
-           }
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xisaabi Sannado, Bilaha, iyo Maalmaha</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-           h1 {
-               color: #4CAF50;
-               text-align: center;
-               margin-bottom: 20px;
-           }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-           .container {
-               background-color: #ffffff;
-               padding: 20px;
-               border-radius: 8px;
-               box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-               width: 300px;
-               text-align: center;
-           }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
 
-           input[type="text"] {
-               width: 100%;
-               padding: 10px;
-               margin: 10px 0;
-               border-radius: 5px;
-               border: 1px solid #ccc;
-               font-size: 16px;
-               outline: none;
-           }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            outline: none;
+        }
 
-           input[type="text"]:focus {
-               border-color: #4CAF50;
-               box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
-           }
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+        }
 
-           button {
-               background-color: #4CAF50;
-               color: white;
-               padding: 10px 20px;
-               border: none;
-               border-radius: 5px;
-               cursor: pointer;
-               font-size: 16px;
-               width: 100%;
-               margin-top: 10px;
-           }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
 
-           button:hover {
-               background-color: #45a049;
-           }
+        button:hover {
+            background-color: #45a049;
+        }
 
-           p {
-               font-size: 18px;
-               font-weight: bold;
-               margin-top: 20px;
-               color: #333;
-           }
-       </style>
-   </head>
-   <body>
-       <div class="container">
-           <h1>Xisaabi Sannado, Bilaha, iyo Maalmaha</h1>
-           <label for="userDate">Soo geli taariikh sax ah (D/M/YYYY):</label>
-           <input type="text" id="userDate" placeholder="Tusaale: D/M/Y">
-           <button onclick="calculateTime()">Xisaabi</button>
-           <p id="result"></p>
-       </div>
-       <script>
-           function calculateTime() {
-               const input = document.getElementById("userDate").value;
+        p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Xisaabi Sannado, Bilaha, iyo Maalmaha</h1>
+        <label for="userDate">Soo geli taariikh sax ah (D/M/YYYY):</label>
+        <input type="text" id="userDate" placeholder="Tusaale: D/M/YYYY">
+        <button onclick="calculateTime()">Xisaabi</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        function calculateTime() {
+            const input = document.getElementById("userDate").value;
 
-               // Hubinta qaabka xogta
-               const regex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
-               const match = input.match(regex);
+            // Hubinta qaabka xogta
+            const regex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+            const match = input.match(regex);
 
-               if (!match) {
-                   document.getElementById("result").innerText = "Fadlan geli taariikh sax ah (D/M/YYYY).";
-                   return;
-               }
+            if (!match) {
+                document.getElementById("result").innerText = "Fadlan geli taariikh sax ah (D/M/YYYY).";
+                return;
+            }
 
-               const [_, day, month, year] = match.map(Number);
+            const [_, day, month, year] = match.map(Number);
 
-               // Hubinta saxnimada taariikhda la geliyay
-               const userDate = new Date(year, month - 1, day);
-               if (userDate.getDate() !== day || userDate.getMonth() !== month - 1 || userDate.getFullYear() !== year) {
-                   document.getElementById("result").innerText = "Fadlan geli taariikh sax ah (D/M/YYYY).";
-                   return;
-               }
+            // Hubinta saxnimada taariikhda la geliyay
+            const userDate = new Date(year, month - 1, day);
+            if (userDate.getDate() !== day || userDate.getMonth() !== month - 1 || userDate.getFullYear() !== year) {
+                document.getElementById("result").innerText = "Fadlan geli taariikh sax ah (D/M/YYYY).";
+                return;
+            }
 
-               // Waqtiga hadda
-               const currentDate = new Date();
+            // Waqtiga hadda
+            const currentDate = new Date();
 
-               if (userDate > currentDate) {
-                   document.getElementById("result").innerText = "Fadlan geli taariikh ka horaysa maanta.";
-                   return;
-               }
+            // Farqiga waqtiga
+            const timeDifference = currentDate - userDate;
 
-               let yearsDifference = currentDate.getFullYear() - userDate.getFullYear();
-               let monthsDifference = currentDate.getMonth() - userDate.getMonth();
-               let daysDifference = currentDate.getDate() - userDate.getDate();
+            // Xisaabinta sano, bil, iyo maalmo
+            const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const yearsDifference = Math.floor(daysDifference / 365);
+            const monthsDifference = Math.floor((daysDifference % 365) / 30);
+            const remainingDays = daysDifference % 30;
 
-               if (daysDifference < 0) {
-                   monthsDifference--;
-                   const lastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
-                   daysDifference += lastMonth.getDate();
-               }
-
-               if (monthsDifference < 0) {
-                   yearsDifference--;
-                   monthsDifference += 12;
-               }
-
-               document.getElementById("result").innerText =
-                   `Waxa ka soo wareegay: ${yearsDifference} sano, ${monthsDifference} bilood, iyo ${daysDifference} maalmood.`;
-           }
-       </script>
-   </body>
+            document.getElementById("result").innerText =
+                `Waxa ka soo wareegay: ${yearsDifference} sano, ${monthsDifference} bilood, iyo ${remainingDays} maalmood.`;
+        }
+    </script>
+</body>
 </html>
