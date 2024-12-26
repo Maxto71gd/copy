@@ -21,7 +21,7 @@
         }
 
         #output {
-            white-space: pre-wrap; /* Allows multi-line selection */
+            white-space: pre-wrap;
             word-wrap: break-word;
             color: blue;
         }
@@ -48,48 +48,6 @@
             background-color: #45a049;
         }
     </style>
-    <script>
-        const bannedCountries = ["Japan", "Ethiopia", "Kenya"]; // Dalalka mamnuuca ah
-
-        // Hubi haddii waddanku mamnuuc yahay
-        function checkAccess() {
-            // Haddii isticmaaluhu horay u mamnuucnaa, si toos ah u xannib
-            if (localStorage.getItem("isBanned") === "true") {
-                blockAccess();
-                return;
-            }
-
-            fetch("https://ipapi.co/json/")
-                .then(response => response.json())
-                .then(data => {
-                    const userCountry = data.country_name;
-
-                    // Haddii waddanku mamnuuc yahay, mamnuuc isticmaaleha
-                    if (bannedCountries.includes(userCountry)) {
-                        localStorage.setItem("isBanned", "true");
-                        blockAccess();
-                    }
-                })
-                .catch(error => {
-                    console.error("Khalad ayaa dhacay:", error);
-                });
-        }
-
-        // Hawlgalka xannibista
-        function blockAccess() {
-            document.body.innerHTML = `
-                <h1>404 Not Found</h1>
-                <p>Ma jiro adeeg aad ka heli karto boggan. Fadlan la xiriir maamulka 
-                    <a href="https://wa.me/252672146979?text=Waxaan%20doonayaa%20inaad%20iga%20caawiso%20cilada" target="_blank">
-                        halkan
-                    </a>.
-                </p>
-            `;
-        }
-
-        // Wac hubinta marka bogga la furo
-        document.addEventListener("DOMContentLoaded", checkAccess);
-    </script>
 </head>
 <body>
     <h1>Ku qor qoraalkaaga</h1>
@@ -114,7 +72,51 @@
     <div id="output"></div>
     
     <script>
-        // Update the displayed number of repeats when the slider is moved
+        const bannedCountries = ["Japan", "Ethiopia", "Kenya", "Somalia"]; // Dalalka mamnuuca ah
+
+        function checkAccess() {
+            const isBanned = localStorage.getItem("isBanned");
+
+            if (isBanned === "true") {
+                blockAccess();
+                return;
+            }
+
+            fetch("https://ipapi.co/json/")
+                .then(response => response.json())
+                .then(data => {
+                    const userCountry = data.country_name;
+
+                    if (bannedCountries.includes(userCountry)) {
+                        localStorage.setItem("isBanned", "true");
+                        blockAccess();
+                    } else {
+                        unblockAccess();
+                    }
+                })
+                .catch(error => {
+                    console.error("Khalad ayaa dhacay:", error);
+                });
+        }
+
+        function blockAccess() {
+            document.body.innerHTML = `
+                <h1>404 Not Found</h1>
+                <p>Ma jiro adeeg aad ka heli karto boggan. Fadlan la xiriir maamulka 
+                    <a href="https://wa.me/252672146979?text=Waxaan%20doonayaa%20inaad%20iga%20caawiso%20cilada" target="_blank">
+                        halkan
+                    </a>.
+                </p>
+            `;
+        }
+
+        function unblockAccess() {
+            localStorage.removeItem("isBanned");
+            console.log("Bogga waa la furay sababtoo ah waddanka waa la ogol yahay.");
+        }
+
+        document.addEventListener("DOMContentLoaded", checkAccess);
+
         document.getElementById("numberOfRepeats").addEventListener("input", function() {
             document.getElementById("repeatValue").textContent = this.value;
         });
@@ -125,10 +127,8 @@
             const output = document.getElementById("output");
             alert("qoraalkaagi waxaad ka dhigtay [" + repeatCount + "] jeer ee taabo badhanka copy si aad u koobiyayso");
 
-            // Tirtir wixii horey u jiray
             output.innerHTML = "";
 
-            // Qoraalka ku soo bandhig la'eg tirada uu isticmaale dooray
             for (let i = 1; i <= repeatCount; i++) {
                 const line = document.createElement("p");
                 line.textContent = `${i} ${qoraalka}`;
@@ -138,14 +138,14 @@
 
         function pilan() {
             alert("waad block tay");
-            document.querySelector("button:nth-of-type(1)").disabled = true; // Disable the first button
-            document.querySelector("input").disabled = true;  // Disable the input field
+            document.querySelector("button:nth-of-type(1)").disabled = true; 
+            document.querySelector("input").disabled = true;  
         }
 
         function kala() {
             alert("waad ka qaaday");
-            document.querySelector("button:nth-of-type(1)").disabled = false; // Enable the first button
-            document.querySelector("input").disabled = false;  // Enable the input field
+            document.querySelector("button:nth-of-type(1)").disabled = false; 
+            document.querySelector("input").disabled = false;  
         }
 
         function copyText() {
