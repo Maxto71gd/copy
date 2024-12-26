@@ -3,31 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAPTCHA with Language and Loading</title>
+    <title>CAPTCHA with Timeout and Persistence</title>
+    <style>
+        /* Qaabeynta Guud */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom right, #ff7f50, #ff4500);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        #captchaText {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 10px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background: #e74c3c;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        #loadingText {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
     <script>
         let captchaCode;
+        let currentLang = "en";
+        let failedAttempts = 0;
+        const blockDuration = 30; // seconds
         const translations = {
             en: {
                 title: "Verify CAPTCHA",
                 instructions: "Please enter the code displayed below:",
                 buttonVerify: "Verify",
                 buttonRefresh: "Refresh",
-                loading: "Loading, please wait... ",
-                success: "Success!.",
-                error: "Incorrect code.",
+                success: "Success!",
+                error: "Incorrect code. Remaining time: ",
+                blocked: `Please wait `,
             },
             so: {
                 title: "Xaqiijin CAPTCHA",
                 instructions: "Fadlan geli koodhka hoose ee muuqda:",
                 buttonVerify: "Xaqiiji",
                 buttonRefresh: "Soo Celi",
-                loading: "Fadlan wax yar sug... ",
                 success: "Koodhku waa sax.",
-                error: "Koodhka sax maaha.",
+                error: "Koodhka sax maaha. Wakhtiga u haray: ",
+                blocked: `Fadlan sug `,
             },
         };
-
-        let currentLang = "en"; // Default language
 
         function generateCaptcha() {
             captchaCode = Math.floor(10000 + Math.random() * 900000);
@@ -36,39 +110,49 @@
 
         function verifyCaptcha() {
             const userInput = document.getElementById("captchaInput").value;
+            const blockEndTime = localStorage.getItem("blockEndTime");
+            const currentTime = Math.floor(Date.now() / 1000);
+
+            if (blockEndTime && currentTime < blockEndTime) {
+                const remainingTime = blockEndTime - currentTime;
+                alert(translations[currentLang].blocked + remainingTime + " seconds.");
+                return;
+            }
+
             if (userInput == captchaCode) {
-                startLoading(() => {
-                    window.location.href = "Output.html";
-                    generateCaptcha();
-                });
+                failedAttempts = 0;
+                localStorage.removeItem("blockEndTime");
+                alert(translations[currentLang].success);
             } else {
-                alert(translations[currentLang].error);
+                failedAttempts++;
+                if (failedAttempts >= 3) {
+                    blockUser();
+                } else {
+                    const remainingTime = blockDuration;
+                    alert(translations[currentLang].error + remainingTime + " seconds.");
+                }
                 generateCaptcha();
             }
         }
 
-        function startLoading(callback) {
-            alert
-            (translations[currentLang].success);
-            const loadingText = document.getElementById("loadingText");
-            const loadingBar = document.getElementById("loadingBar");
-            let progress = 0;
-
-            loadingText.style.display = "block";
-            loadingBar.style.display = "block";
+        function blockUser() {
+            const blockEndTime = Math.floor(Date.now() / 1000) + blockDuration;
+            localStorage.setItem("blockEndTime", blockEndTime);
+            document.getElementById("btnVerify").disabled = true;
+            document.getElementById("btnRefresh").disabled = true;
 
             const interval = setInterval(() => {
-                progress++;
-                loadingText.textContent = `${translations[currentLang].loading}${progress}%`;
-                loadingBar.style.width = `${progress}%`;
-
-                if (progress >= 100) {
+                const currentTime = Math.floor(Date.now() / 1000);
+                const remainingTime = blockEndTime - currentTime;
+                if (remainingTime <= 0) {
                     clearInterval(interval);
-                    loadingText.style.display = "none";
-                    loadingBar.style.display = "none";
-                    if (callback) callback();
+                    document.getElementById("btnVerify").disabled = false;
+                    document.getElementById("btnRefresh").disabled = false;
+                    localStorage.removeItem("blockEndTime");
                 }
-            }, 30); // Quick progress (30ms per step)
+                document.getElementById("loadingText").textContent = 
+                    translations[currentLang].blocked + remainingTime + " seconds.";
+            }, 1000);
         }
 
         function refreshCaptcha() {
@@ -82,108 +166,21 @@
             document.getElementById("instructions").textContent = translations[lang].instructions;
             document.getElementById("btnVerify").textContent = translations[lang].buttonVerify;
             document.getElementById("btnRefresh").textContent = translations[lang].buttonRefresh;
-            document.getElementById("loadingText").textContent = translations[lang].loading;
         }
 
         window.onload = function () {
             generateCaptcha();
+            const blockEndTime = localStorage.getItem("blockEndTime");
+            if (blockEndTime) {
+                const currentTime = Math.floor(Date.now() / 1000);
+                if (currentTime < blockEndTime) {
+                    blockUser();
+                }
+            }
         };
     </script>
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(to bottom right, #ff1919, #ff6f61);
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            text-align: center;
-            background: #fff;
-            padding: 20px 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 300px;
-        }
-
-        h1 {
-            font-size: 2rem;
-            color: #333;
-        }
-
-        p {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        #captchaText {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #007BFF;
-            margin-bottom: 20px;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 1rem;
-            color: #fff;
-            background: #007BFF;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-
-        #loadingText {
-            display: none;
-            margin-top: 20px;
-            font-size: 1rem;
-            color: #007BFF;
-            font-weight: bold;
-        }
-
-        #loadingBar {
-            display: none;
-            width: 0;
-            height: 10px;
-            background: #007BFF;
-            border-radius: 5px;
-            margin-top: 10px;
-            transition: width 0.3s;
-        }
-
-        select {
-            margin-bottom: 20px;
-            padding: 10px;
-            font-size: 1rem;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            background: #fff;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
-
     <div class="container">
         <select onchange="changeLanguage(this.value)">
             <option value="en">English</option>
@@ -199,8 +196,6 @@
         <button id="btnRefresh" onclick="refreshCaptcha()">Refresh</button>
 
         <div id="loadingText"></div>
-        <div id="loadingBar"></div>
     </div>
-
 </body>
-    </html>
+</html>
