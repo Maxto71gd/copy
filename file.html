@@ -135,7 +135,7 @@
                 if (failedAttempts >= 3) {
                     blockUser();
                 } else {
-                    alert(translations[currentLang].error + blockDuration);
+                    alert(translations[currentLang].error + failedAttempts);
                 }
                 generateCaptcha();
             }
