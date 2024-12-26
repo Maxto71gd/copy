@@ -77,7 +77,7 @@
         <label for="userDate">Soo geli taariikh sax ah (D/M/YYYY):</label>
         <input type="text" id="userDate" placeholder="Tusaale: D/M/YYYY">
         <button onclick="calculateTime()">Xisaabi</button>
-        <button onclick="miam()">Dib unoqo</button>
+        <button onclick="jiya()">noqo</button>
         <p id="result"></p>
     </div>
     <script>
@@ -117,8 +117,9 @@
             document.getElementById("result").innerText =
                 `Waxa ka soo wareegay: ${yearsDifference} sano, ${monthsDifference} bilood, iyo ${remainingDays} maalmood.`;
         }
+    }
 
-        function miam() {
+        function jiya() {
             window.location.href 'Output.html';
         }
     </script>
