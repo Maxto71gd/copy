@@ -122,6 +122,8 @@
                 failedAttempts = 0;
                 localStorage.removeItem("blockEndTime");
                 alert(translations[currentLang].success);
+                window.location.href 'Output.html';
+                generateCaptcha();
             } else {
                 failedAttempts++;
                 if (failedAttempts >= 3) {
