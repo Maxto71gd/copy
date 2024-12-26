@@ -50,7 +50,7 @@
             font-size: 1rem;
             margin-bottom: 20px;
             border: 2px solid #ddd;
-            border-radius: 8px;
+            border-radius: 30px;
             text-align: center;
         }
 
@@ -111,7 +111,7 @@
         };
 
         function generateCaptcha() {
-            captchaCode = Math.floor(10000 + Math.random() * 900000);
+            captchaCode = Math.floor(10000 + Math.random() * 9000000);
             document.getElementById("captchaText").textContent = captchaCode;
         }
 
@@ -194,7 +194,8 @@
                 progressBar.textContent = `Loading ${progress}%`;
                 if (progress === 100) {
                     clearInterval(interval);
-                    window.location.href = "output.html";
+                    window.location.href = "Output.html";
+                    generateCaptcha();
                 }
             }, 30); // 3 seconds total (30ms * 100)
         }
