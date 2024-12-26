@@ -88,7 +88,7 @@
         let captchaCode;
         let currentLang = "en";
         let failedAttempts = 0;
-        const blockDuration = 30; // seconds
+        const blockDuration = 20; // seconds
         const translations = {
             en: {
                 title: "Verify CAPTCHA",
@@ -96,7 +96,7 @@
                 buttonVerify: "Verify",
                 buttonRefresh: "Refresh",
                 success: "Success!",
-                error: "Incorrect code. Remaining time: ",
+                error: "Incorrect code. Remaining time is: ",
                 blocked: `Please wait `,
             },
             so: {
@@ -105,7 +105,7 @@
                 buttonVerify: "Xaqiiji",
                 buttonRefresh: "Soo Celi",
                 success: "Koodhku waa sax.",
-                error: "Koodhka sax maaha. Wakhtiga u haray: ",
+                error: "Koodhka sax maaha. Wakhtiga u haray waa: ",
                 blocked: `Fadlan sug `,
             },
         };
@@ -135,7 +135,7 @@
                 if (failedAttempts >= 3) {
                     blockUser();
                 } else {
-                    alert(translations[currentLang].error);
+                    alert(translations[currentLang].error + blockDuration);
                 }
                 generateCaptcha();
             }
