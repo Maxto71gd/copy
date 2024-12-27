@@ -58,8 +58,9 @@
         input:hover {
             border-color: red;
         }
-        input[type="text"]:focus {
-            border-color: #29ffa2;
+        input:disabled {
+            background: #859997;
+            
         }
 
         button {
@@ -196,6 +197,7 @@
         function resetUI() {
             document.getElementById("btnVerify").disabled = false;
             document.getElementById("btnRefresh").disabled = false;
+            document.getElementById("captchaInput").disabled = false;
             document.getElementById("loadingText").textContent = "";
         }
 
