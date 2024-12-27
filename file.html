@@ -101,7 +101,7 @@
                 buttonVerify: "Verify",
                 buttonRefresh: "Refresh",
                 success: "Success!",
-                error: "Incorrect code.: ",
+                error: "Incorrect code.",
                 blocked: `Please wait `,
             },
             so: {
@@ -110,13 +110,19 @@
                 buttonVerify: "Xaqiiji",
                 buttonRefresh: "Soo Celi",
                 success: "Koodhku waa sax.",
-                error: "Koodhka sax maaha: ",
+                error: "Koodhka sax maaha.",
                 blocked: `Fadlan sug `,
             },
         };
 
         function generateCaptcha() {
-            captchaCode = Math.floor(1000 + Math.random() * 9000);
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklm./>[](nopqrstuvwxyz0123456789"; // Qoraalka iyo lambarada
+            const captchaLength = 6; // Dhererka CAPTCHA
+            captchaCode = "";
+            for (let i = 0; i < captchaLength; i++) {
+                const randomIndex = Math.floor(Math.random() * chars.length);
+                captchaCode += chars[randomIndex];
+            }
             document.getElementById("captchaText").textContent = captchaCode;
         }
 
@@ -131,7 +137,7 @@
                 return;
             }
 
-            if (userInput == captchaCode) {
+            if (userInput === captchaCode) {
                 failedAttempts = 0;
                 localStorage.removeItem("blockEndTime");
                 startLoading();
@@ -237,4 +243,4 @@
         <div id="progressBar"></div>
     </div>
 </body>
-                                                                   </html>
+</html>
