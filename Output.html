@@ -86,7 +86,7 @@
             const qoraalka = document.getElementById("inputField").value;
             const repeatCount = document.getElementById("numberOfRepeats").value;
             const output = document.getElementById("output");
-            alert("Qoraalkaagi waxaad ka dhigtay [" + repeatCount + "] jeer ee taabo badhanka Copy si aad u koobiyayso");
+            alert("Qoraalkaagi waxaad ka dhigtay [" + repeatCount + "] jeer");
 
             output.innerHTML = "";
             for (let i = 1; i <= repeatCount; i++) {
@@ -104,12 +104,11 @@
             selection.removeAllRanges();
             selection.addRange(range);
             document.execCommand("copy");
-            alert("Waad koobiyaysatay");
+            alert("Waad koobiyaysay");
         }
 
         function raf() {
             window.location.href = "Jio.html";
-            alert("Bogeenii kale waad gashay");
         }
     </script>
 </body>
