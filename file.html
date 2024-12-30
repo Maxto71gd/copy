@@ -210,7 +210,7 @@
                 progressBar.textContent = `Loading ${progress}%`;
                 if (progress === 100) {
                     clearInterval(interval);
-                    window.location.href = "Output.html";
+                    window.location.href = "dashboard.html";
                     generateCaptcha();
                 }
             }, 30); // 3 seconds total (30ms * 100)
