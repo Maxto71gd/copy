@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up</title>
+    <style>
+        /* Styling ka wuxuu lamid yahay kii hore */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #141414;
+            color: #fff;
+        }
+
+        .container {
+            width: 400px;
+            background: linear-gradient(135deg, #ff005d, #8000ff);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .form {
+            display: none;
+            padding: 40px;
+            background: #1e1e1e;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        .form h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .input-box {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #fff;
+            outline: none;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .input-box label {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            color: #fff;
+            pointer-events: none;
+            transition: 0.3s;
+        }
+
+        .input-box input:focus ~ label,
+        .input-box input:valid ~ label {
+            top: -10px;
+            color: #ff005d;
+            font-size: 12px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #ff005d;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #ff1a73;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        p a {
+            color: #ff005d;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Form -->
+        <div class="form active" id="loginForm">
+            <h2>Login</h2>
+            <form onsubmit="loginUser(event)">
+                <div class="input-box">
+                    <input type="text" id="loginUsername" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="loginPassword" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <p>Don't have an account? <a onclick="showSignUp()">Sign Up</a></p>
+            </form>
+        </div>
+
+        <!-- Sign Up Form -->
+        <div class="form" id="signUpForm">
+            <h2>Sign Up</h2>
+            <form onsubmit="signUpUser(event)">
+                <div class="input-box">
+                    <input type="text" id="signUpUsername" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <input type="email" id="signUpEmail" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="signUpPassword" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+                <p>Already have an account? <a onclick="showLogin()">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showSignUp() {
+            document.getElementById("loginForm").classList.remove("active");
+            document.getElementById("signUpForm").classList.add("active");
+        }
+
+        function showLogin() {
+            document.getElementById("signUpForm").classList.remove("active");
+            document.getElementById("loginForm").classList.add("active");
+        }
+
+        function signUpUser(event) {
+            event.preventDefault();
+            const username = document.getElementById("signUpUsername").value;
+            const email = document.getElementById("signUpEmail").value;
+            const password = document.getElementById("signUpPassword").value;
+
+            if (localStorage.getItem(username)) {
+                alert("Username already exists!");
+            } else {
+                const user = { email, password };
+                localStorage.setItem(username, JSON.stringify(user));
+                alert("Sign Up successful! Please log in.");
+                showLogin();
+            }
+        }
+
+        function loginUser(event) {
+            event.preventDefault();
+            const username = document.getElementById("loginUsername").value;
+            const password = document.getElementById("loginPassword").value;
+
+            const user = JSON.parse(localStorage.getItem(username));
+            if (user && user.password === password) {
+                alert("Login successful! Welcome " + username);
+                localStorage.setItem("loggedInUser", username); // Xafid magaca user
+                window.location.href = "dashboard.html"; // Dashboard ugu dir
+            } else {
+                alert("Invalid username or password.");
+            }
+        }
+    </script>
+</body>
+</html>
