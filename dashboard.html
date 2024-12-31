@@ -1,8 +1,7 @@
  <script>
         // Hubi haddii user soo galay
         const loggedInUser = localStorage.getItem("loggedInUser");
-        if (!loggedInUser) {
-            alert("Please log in first.");
+        if (!loggedInUser) 
             window.location.href = "index.html"; // Celinta Login page
         } else {
             document.getElementById("welcomeMessage").textContent = "Hello, " + loggedInUser + "!";
