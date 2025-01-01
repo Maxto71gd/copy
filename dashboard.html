@@ -37,7 +37,7 @@
     <button onclick="copyText()">Copy</button>
     <button onclick="logout()">log out</button>
 
-    <input type="range" id="numberOfRepeats" min="1" max="999" value="0" step="1">
+    <input type="range" id="numberOfRepeats" min="1" max="50" value="0" step="1">
     <span id="repeatValue">0</span> jeer
     <label>xadka tirada</label>
 
@@ -51,7 +51,7 @@
     <div id="output"></div>
 
     <script>
-        const bannedCountries = ["Somalia", "Ethiopia", "Kenya"];
+        const bannedCountries = ["Japan", "Ethiopia", "Kenya"];
 
         document.addEventListener("DOMContentLoaded", () => {
             localStorage.removeItem("isBanned"); // Nadiifi xogta hore
