@@ -1,15 +1,3 @@
- <script>
-        // Hubi haddii user soo galay
-        const loggedInUser = localStorage.getItem("loggedInUser");
-        if (!loggedInUser) {
-            window.location.href = "index.html"; // Celinta Login page
-        } else {
-            document.getElementById("welcomeMessage").textContent = "Hello, " + loggedInUser + "!";
-        }
-    </script>
-</body>
-</html>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,67 +16,91 @@
             border: none; border-radius: 5px; cursor: pointer; font-size: 16px;
         }
         button:hover { background-color: #45a049; }
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>Ku qor qoraalkaaga</h1>
-    <input type="text" id="inputField" placeholder="Geli qoraalkaaga">
-    <button onclick="processInput()">Soo bandhig</button>
-    <button onclick="copyText()">Copy</button>
-    <button onclick="logout()">log out</button>
+    <select id="languageSelector" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="so">Somali</option>
+    </select>
 
-    <input type="range" id="numberOfRepeats" min="1" max="100" value="0" step="1">
-    <span id="repeatValue">0</span> jeer
-    <label>xadka tirada</label>
+    <h1 id="title">Write your text</h1>
+    <input type="text" id="inputField" placeholder="Enter your text">
+    <button id="btnDisplay" onclick="processInput()">Display</button>
+    <button id="btnCopy" onclick="copyText()">Copy</button>
+    <button id="btnLogout" onclick="logout()">Log Out</button>
 
-    <a href="https://wa.me/252672146979?text=Waxaan%20doonayaa%20inaad%20iga%20caawiso%20cilada" target="_blank" class="mami">
-        Contacts
+    <input type="range" id="numberOfRepeats" min="1" max="100" value="1" step="1">
+    <span id="repeatValue">1</span> <span id="timesLabel">times</span>
+    <label id="rangeLabel">Select number of repetitions</label>
+
+    <a href="https://wa.me/252672146979?text=Help" target="_blank" class="mami" id="contactLink">
+        Contact Us
     </a>
-    <label>Caawinaad</label>
-    <button onclick="raf()">Bogeena kale</button>
+    <label id="helpLabel">Help</label>
+    <button id="btnOtherPage" onclick="raf()">Visit our other page</button>
 
-    <h2>Natiijooyinka:</h2>
+    <h2 id="resultTitle">Results:</h2>
     <div id="output"></div>
 
     <script>
-        const bannedCountries = ["Japan", "Ethiopia", "Kenya"];
+        const translations = {
+            en: {
+                title: "Write your text",
+                inputPlaceholder: "Enter your text",
+                btnDisplay: "Display",
+                btnCopy: "Copy",
+                btnLogout: "Log Out",
+                timesLabel: "times",
+                rangeLabel: "Select number of repetitions",
+                contactLink: "Contact Us",
+                helpLabel: "Help",
+                btnOtherPage: "Visit our other page",
+                resultTitle: "Results:",
+                alertRepeat: "Your text will be displayed ",
+                alertCopied: "Copied to clipboard.",
+                logoutMessage: "You have logged out.",
+            },
+            so: {
+                title: "Ku qor qoraalkaaga",
+                inputPlaceholder: "Geli qoraalkaaga",
+                btnDisplay: "Soo bandhig",
+                btnCopy: "Koobi",
+                btnLogout: "Ka bax",
+                timesLabel: "jeer",
+                rangeLabel: "Xulo tirada",
+                contactLink: "Nagala soo xiriir",
+                helpLabel: "Caawinaad",
+                btnOtherPage: "Booqo boggeena kale",
+                resultTitle: "Natiijooyinka:",
+                alertRepeat: "Qoraalkaagi waxaad ka dhigtay ",
+                alertCopied: "Waad koobiyaysay.",
+                logoutMessage: "Waad ka baxday.",
+            },
+        };
 
-        document.addEventListener("DOMContentLoaded", () => {
-            localStorage.removeItem("isBanned"); // Nadiifi xogta hore
-            checkAccess();
-        });
+        let currentLang = "en";
 
-        function checkAccess() {
-            fetch("https://ipapi.co/json/")
-                .then(response => response.json())
-                .then(data => {
-                    const userCountry = data.country_name;
-
-                    if (bannedCountries.includes(userCountry)) {
-                        localStorage.setItem("isBanned", "true");
-                        blockAccess();
-                    } else {
-                        unblockAccess();
-                    }
-                })
-                .catch(error => {
-                    console.error("Khalad ayaa dhacay:", error);
-                });
-        }
-
-        function blockAccess() {
-            document.body.innerHTML = `
-                <h1>404 Not Found</h1>
-                <p>Ma jiro adeeg aad ka heli karto boggan. Fadlan la xiriir maamulka 
-                    <a href="https://wa.me/252672146979?text=Waxaan%20doonayaa%20inaad%20iga%20caawiso%20cilada" target="_blank">
-                        halkan
-                    </a>.
-                </p>
-            `;
-        }
-
-        function unblockAccess() {
-            console.log("Bogga waa la furay sababtoo ah waddanka waa la ogol yahay.");
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            document.getElementById("title").textContent = t.title;
+            document.getElementById("inputField").placeholder = t.inputPlaceholder;
+            document.getElementById("btnDisplay").textContent = t.btnDisplay;
+            document.getElementById("btnCopy").textContent = t.btnCopy;
+            document.getElementById("btnLogout").textContent = t.btnLogout;
+            document.getElementById("timesLabel").textContent = t.timesLabel;
+            document.getElementById("rangeLabel").textContent = t.rangeLabel;
+            document.getElementById("contactLink").textContent = t.contactLink;
+            document.getElementById("helpLabel").textContent = t.helpLabel;
+            document.getElementById("btnOtherPage").textContent = t.btnOtherPage;
+            document.getElementById("resultTitle").textContent = t.resultTitle;
         }
 
         document.getElementById("numberOfRepeats").addEventListener("input", function() {
@@ -96,20 +108,20 @@
         });
 
         function processInput() {
-            const qoraalka = document.getElementById("inputField").value;
+            const text = document.getElementById("inputField").value;
             const repeatCount = document.getElementById("numberOfRepeats").value;
             const output = document.getElementById("output");
-            alert("Qoraalkaagi waxaad ka dhigtay [" + repeatCount + "] jeer");
+            alert(translations[currentLang].alertRepeat + repeatCount + " " + translations[currentLang].timesLabel);
 
             output.innerHTML = "";
             for (let i = 1; i <= repeatCount; i++) {
                 const line = document.createElement("p");
-                line.textContent = `${i} ${qoraalka}`;
+                line.textContent = `${i} ${text}`;
                 output.appendChild(line);
             }
         }
 
-         function copyText() {
+        function copyText() {
             const output = document.getElementById("output");
             const range = document.createRange();
             range.selectNodeContents(output);
@@ -117,17 +129,17 @@
             selection.removeAllRanges();
             selection.addRange(range);
             document.execCommand("copy");
-            alert("Waad koobiyaysay");
+            alert(translations[currentLang].alertCopied);
         }
 
         function raf() {
             window.location.href = "Jio.html";
         }
-     
+
         function logout() {
             localStorage.removeItem("loggedInUser");
-            alert("you logouted");
-            window.location.href ="index.html";
+            alert(translations[currentLang].logoutMessage);
+            window.location.href = "index.html";
         }
     </script>
 </body>
