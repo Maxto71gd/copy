@@ -79,9 +79,12 @@
         <button onclick="calculateTime()">Xisaabi</button>
         <button onclick="jiya()">Noqo</button>
         <p id="result"></p>
+       <audio id="loginSound" src="file:///storage/emulated/0/Download/NewFolder/play.sound.mp3"></audio>
     </div>
     <script>
         function calculateTime() {
+          var sound = document.getElementById("loginSound");
+            sound.play();
             const input = document.getElementById("userDate").value;
 
             // Hubinta qaabka xogta
@@ -89,7 +92,7 @@
             const match = input.match(regex);
 
             if (!match) {
-                document.getElementById("result").innerText = "Fadlan geli taariikh sax ah (D/M/YYYY).";
+                document.getElementById("result").innerText = "Fadlan geli dhalasho sax ah (D/M/YYYY).";
                 return;
             }
 
