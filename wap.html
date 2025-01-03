@@ -80,6 +80,7 @@
         <button onclick="jiya()">Noqo</button>
         <p id="result"></p>
        <audio id="loginSound" src="play.sound.mp3"></audio>
+         <audio id="loginpound" src="play.sound1.mp3"></audio>
     </div>
     <script>
         function calculateTime() {
@@ -122,6 +123,8 @@
         }
 
         function jiya() {
+            var sound = document.getElementById("loginpound");
+            sound.play();
             window.location.href = 'dashboard.html'; // U dir isticmaalaha bog kale
         }
     </script>
